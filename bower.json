@@ -1,0 +1,14 @@
+{
+    "name": "modulex-util",
+    "version": "1.0.0",
+    "author": "yiminghe <yiminghe@gmail.com>",
+    "engines": {
+        "node": "~0.10"
+    },
+    "license": "MIT",
+    "ignore": ["**/*", "!util.js", "!lib/**/*"],
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/yiminghe/node-jscover-handler.git"
+    }
+}
