@@ -4,6 +4,7 @@
  * @author  yiminghe@gmail.com
  */
 
+
 require('./util/array');
 require('./util/escape');
 require('./util/function');

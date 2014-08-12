@@ -29,7 +29,7 @@ function bindFn(r, fn, obj) {
 util.mix(util, {
     /**
      * empty function
-     * @member KISSY
+     * @member util
      */
     noop: function () {
     },
@@ -40,7 +40,7 @@ util.mix(util, {
      * @param {Function} fn internal called function
      * @param {Object} obj context in which fn runs
      * @param {*...} var_args extra arguments
-     * @member KISSY
+     * @member util
      * @return {Function} new function with context and arguments
      */
     bind: bindFn(0, bindFn, null, 0),
@@ -52,7 +52,7 @@ util.mix(util, {
      * @param {Function} fn internal called function
      * @param {Object} obj context in which fn runs
      * @param {*...} var_args extra arguments
-     * @member KISSY
+     * @member util
      * @return {Function} new function with context and arguments
      */
     rbind: bindFn(0, bindFn, null, 1),
@@ -80,7 +80,7 @@ util.mix(util, {
      * @return {Object} a timer object. Call the cancel() method on this object to stop
      * the timer.
      *
-     * @member KISSY
+     * @member util
      */
     later: function (fn, when, periodic, context, data) {
         when = when || 0;
@@ -123,7 +123,7 @@ util.mix(util, {
      * @param {Number} [ms] The number of milliseconds to throttle the method call.
      * Passing a -1 will disable the throttle. Defaults to 150.
      * @return {Function} Returns a wrapped function that calls fn throttled.
-     * @member KISSY
+     * @member util
      */
     throttle: function (fn, ms, context) {
         ms = ms || 150;
@@ -151,7 +151,7 @@ util.mix(util, {
      * @param {Number} ms
      * @param {Object} [context]
      * @return {Function} Returns a wrapped function that calls fn buffered.
-     * @member KISSY
+     * @member util
      */
     buffer: function (fn, ms, context) {
         ms = ms || 150;

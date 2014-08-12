@@ -1,6 +1,12 @@
 var guid = 0,
     EMPTY = '';
 
+/**
+ * utilities.
+ * Provides Dom helper methods.
+ * @class util
+ * @singleton
+ */
 module.exports = {
     mix: function (to, from) {
         for (var i in from) {

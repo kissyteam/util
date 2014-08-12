@@ -5,8 +5,6 @@
  */
 
 var util = require('./base');
-var LoggerManager = require('logger-manager');
-var logger = LoggerManager.getLogger('util');
 var undef;
 var MIX_CIRCULAR_DETECTION = '__MIX_CIRCULAR';
 var STAMP_MARKER = '__~ks_stamped';
@@ -82,7 +80,7 @@ mix(util, {
      * Checks to see whether two object are equals.
      * @param a
      * @param b
-     * @member KISSY
+     * @member util
      */
     equals: function (a, b) {
         if (a === b) {
@@ -111,7 +109,7 @@ mix(util, {
      * Get all the property names of o as array
      * @param {Object} o
      * @return {Array}
-     * @member KISSY
+     * @member util
      */
     keys: Object.keys || function (o) {
         var result = [], p, i;
@@ -140,7 +138,7 @@ mix(util, {
      * @param fn {Function} the function to execute on each item. The function
      *        receives three arguments: the value, the index, the full array.
      * @param {Object} [context]
-     * @member KISSY
+     * @member util
      */
     each: function (object, fn, context) {
         if (object) {
@@ -180,7 +178,7 @@ mix(util, {
      * refer:  https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date/now
      * http://j-query.blogspot.com/2011/02/timing-ecmascript-5-datenow-function.html
      * http://kangax.github.com/es5-compat-table/
-     * @member KISSY
+     * @member util
      * @return {Number} current time
      */
     now: Date.now || function () {
@@ -189,7 +187,7 @@ mix(util, {
 
     /**
      * Checks to see if an object is empty.
-     * @member KISSY
+     * @member util
      */
     isEmptyObject: function (o) {
         for (var p in o) {
@@ -205,7 +203,7 @@ mix(util, {
      * @param {Boolean} [readOnly] while set marker on o if marker does not exist
      * @param {String} [marker] the marker will be set on Object
      * @return {String} guid associated with this object
-     * @member KISSY
+     * @member util
      */
     stamp: function (o, readOnly, marker) {
         marker = marker || STAMP_MARKER;
@@ -235,7 +233,7 @@ mix(util, {
      * @param {String[]|Function} [wl] array of white-list properties
      * @param [deep=false] {Boolean} whether recursive mix if encounter object.
      * @return {Object} the augmented object
-     * @member KISSY
+     * @member util
      *
      *     @example
      *     var t = {};
@@ -287,7 +285,7 @@ mix(util, {
      * single object will create a shallow copy of it.
      * @param {...Object} varArgs objects need to be merged
      * @return {Object} the new merged object
-     * @member KISSY
+     * @member util
      */
     merge: function (varArgs) {
         varArgs = util.makeArray(arguments);
@@ -307,7 +305,7 @@ mix(util, {
      *          {Boolean} [ov=true] whether overwrite existing property
      *          {String[]} [wl] array of white-list properties
      * @return  {Object} the augmented object
-     * @member KISSY
+     * @member util
      */
     augment: function (r, varArgs) {
         var args = util.makeArray(arguments),
@@ -350,21 +348,9 @@ mix(util, {
      * @param {Object} [px] prototype properties to add/override
      * @param {Object} [sx] static properties to add/override
      * @return r {Object}
-     * @member KISSY
+     * @member util
      */
     extend: function (r, s, px, sx) {
-        if ('@DEBUG@') {
-            if (!r) {
-                logger.error('extend r is null');
-            }
-            if (!s) {
-                logger.error('extend s is null');
-            }
-            if (!s || !r) {
-                return r;
-            }
-        }
-
         var sp = s.prototype,
             rp;
 
@@ -399,7 +385,7 @@ mix(util, {
      *      util.namespace('app.Shop'); // returns app.Shop
      *
      * @return {Object}  A reference to the last namespace object created
-     * @member KISSY
+     * @member util
      */
     namespace: function (name, holder) {
         var o, j, p;
@@ -414,7 +400,7 @@ mix(util, {
     /**
      * Creates a deep copy of a plain object or array. Others are returned untouched.
      * @param input
-     * @member KISSY
+     * @member util
      * @param {Function} [filter] filter function
      * @return {Object} the new cloned object
      * refer: http://www.w3.org/TR/html5/common-dom-interfaces.html#safe-passing-of-structured-data

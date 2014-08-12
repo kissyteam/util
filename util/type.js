@@ -19,7 +19,7 @@ function hasOwnProperty(o, p) {
 util.mix(util, {
     /**
      * Determine the internal JavaScript [[Class]] of an object.
-     * @member KISSY
+     * @member util
      */
     type: function (o) {
         return o == null ?
@@ -30,7 +30,7 @@ util.mix(util, {
     /**
      * Checks to see if an object is a plain object (created using '{}'
      * or 'new Object()' but not 'new FunctionClass()').
-     * @member KISSY
+     * @member util
      */
     isPlainObject: function (obj) {
         // Must be an Object.
@@ -72,7 +72,7 @@ if ('@DEBUG@') {
          * @method
          * @param  o
          * @return {Boolean}
-         * @member KISSY
+         * @member util
          */
         isBoolean: noop,
         /**
@@ -80,7 +80,7 @@ if ('@DEBUG@') {
          * @method
          * @param  o
          * @return {Boolean}
-         * @member KISSY
+         * @member util
          */
         isNumber: noop,
         /**
@@ -88,7 +88,7 @@ if ('@DEBUG@') {
          * @method
          * @param  o
          * @return {Boolean}
-         * @member KISSY
+         * @member util
          */
         isString: noop,
         /**
@@ -96,7 +96,7 @@ if ('@DEBUG@') {
          * @method
          * @param  o
          * @return {Boolean}
-         * @member KISSY
+         * @member util
          */
         isFunction: noop,
         /**
@@ -104,7 +104,7 @@ if ('@DEBUG@') {
          * @method
          * @param  o
          * @return {Boolean}
-         * @member KISSY
+         * @member util
          */
         isArray: noop,
         /**
@@ -112,7 +112,7 @@ if ('@DEBUG@') {
          * @method
          * @param  o
          * @return {Boolean}
-         * @member KISSY
+         * @member util
          */
         isDate: noop,
         /**
@@ -120,7 +120,7 @@ if ('@DEBUG@') {
          * @method
          * @param  o
          * @return {Boolean}
-         * @member KISSY
+         * @member util
          */
         isRegExp: noop,
         /**
@@ -128,7 +128,7 @@ if ('@DEBUG@') {
          * @method
          * @param  o
          * @return {Boolean}
-         * @member KISSY
+         * @member util
          */
         isObject: noop
     });

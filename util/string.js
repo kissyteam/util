@@ -27,7 +27,7 @@ util.mix(util, {
      * @param {String} str the whole string
      * @param {String} prefix a specified substring
      * @return {Boolean} whether str start with prefix
-     * @member KISSY
+     * @member util
      */
     startsWith: function (str, prefix) {
         return str.lastIndexOf(prefix, 0) === 0;
@@ -38,7 +38,7 @@ util.mix(util, {
      * @param {String} str the whole string
      * @param {String} suffix a specified substring
      * @return {Boolean} whether str end with suffix
-     * @member KISSY
+     * @member util
      */
     endsWith: function (str, suffix) {
         var ind = str.length - suffix.length;
@@ -48,7 +48,7 @@ util.mix(util, {
     /**
      * Removes the whitespace from the beginning and end of a string.
      * @method
-     * @member KISSY
+     * @member util
      */
     trim: trim ?
         function (str) {
@@ -62,7 +62,7 @@ util.mix(util, {
      * Call encodeURIComponent to encode a url component
      * @param {String} s part of url to be encoded.
      * @return {String} encoded url part string.
-     * @member KISSY
+     * @member util
      */
     urlEncode: function (s) {
         return encodeURIComponent(String(s));
@@ -73,7 +73,7 @@ util.mix(util, {
      * and replace '+' with space.
      * @param {String} s part of url to be decoded.
      * @return {String} decoded url part string.
-     * @member KISSY
+     * @member util
      */
     urlDecode: function (s) {
         return decodeURIComponent(s.replace(/\+/g, ' '));
@@ -90,7 +90,7 @@ util.mix(util, {
      * Removes undef keywords and ignores escaped keywords.
      * @param {String} str template string
      * @param {Object} o json data
-     * @member KISSY
+     * @member util
      * @param {RegExp} [regexp] to match a piece of template string
      */
     substitute: function (str, o, regexp) {
@@ -107,7 +107,7 @@ util.mix(util, {
     },
 
     /** uppercase first character.
-     * @member KISSY
+     * @member util
      * @param s
      * @return {String}
      */

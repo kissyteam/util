@@ -71,7 +71,7 @@ util.mix(util, {
      *
      * [http://wonko.com/post/html-escaping](http://wonko.com/post/html-escaping)
      * @param str {string} text2html show
-     * @member KISSY
+     * @member util
      * @return {String} escaped html
      */
     escapeHtml: function (str) {
@@ -90,7 +90,7 @@ util.mix(util, {
     /**
      * get escaped regexp string for construct regexp.
      * @param str
-     * @member KISSY
+     * @member util
      * @return {String} escaped regexp
      */
     escapeRegExp: function (str) {
@@ -102,7 +102,7 @@ util.mix(util, {
      * only unescape
      *      &amp; &lt; &gt; &#x60; &#x2F; &quot; &#x27; &#\d{1,5}
      * @param str {string} html2text
-     * @member KISSY
+     * @member util
      * @return {String} un-escaped html
      */
     unEscapeHtml: function (str) {

@@ -21,7 +21,7 @@ util.mix(util, {
      * Search for a specified value within an array.
      * @param item individual item to be searched
      * @method
-     * @member KISSY
+     * @member util
      * @param {Array} arr the array of items where item will be search
      * @return {number} item's index in array
      */
@@ -48,7 +48,7 @@ util.mix(util, {
      * @param item individual item to be searched
      * @param {Array} arr the array of items where item will be search
      * @return {number} item's last index in array
-     * @member KISSY
+     * @member util
      */
     lastIndexOf: (lastIndexOf) ?
         function (item, arr, fromIndex) {
@@ -74,7 +74,7 @@ util.mix(util, {
      * @param [override] {Boolean} if override is TRUE, util.unique([a, b, a]) => [b, a].
      * if override is FALSE, util.unique([a, b, a]) => [a, b]
      * @return {Array} a copy of the array with duplicate entries removed
-     * @member KISSY
+     * @member util
      */
     unique: function (a, override) {
         var b = a.slice();
@@ -104,7 +104,7 @@ util.mix(util, {
      * @param item individual item to be searched
      * @param {Array} arr the array of items where item will be search
      * @return {Boolean} the item exists in arr
-     * @member KISSY
+     * @member util
      */
     inArray: function (item, arr) {
         return util.indexOf(item, arr) > -1;
@@ -114,7 +114,7 @@ util.mix(util, {
      * Executes the supplied function on each item in the array.
      * Returns a new array containing the items that the supplied
      * function returned TRUE for.
-     * @member KISSY
+     * @member util
      * @method
      * @param arr {Array} the array to iterate
      * @param fn {Function} the function to execute on each item
@@ -146,7 +146,7 @@ util.mix(util, {
      * @param [context] {Object} optional context object
      * refer: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/map
      * @return {Array} The items on which the supplied function returned
-     * @member KISSY
+     * @member util
      */
     map: map ?
         function (arr, fn, context) {
@@ -176,7 +176,7 @@ util.mix(util, {
      * @param initialValue {number} optional context object
      * refer: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/reduce
      * @return {Array} The items on which the supplied function returned
-     * @member KISSY
+     * @member util
      */
     reduce: function (arr, callback, initialValue) {
         var len = arr.length;
@@ -225,7 +225,7 @@ util.mix(util, {
      * @param arr {Array} the array to iterate
      * @param callback {Function} the function to execute on each item
      * @param [context] {Object} optional context object
-     * @member KISSY
+     * @member util
      * @return {Boolean} whether all elements in the array pass the test implemented by the provided function.
      */
     every: every ?
@@ -248,7 +248,7 @@ util.mix(util, {
      * @param arr {Array} the array to iterate
      * @param callback {Function} the function to execute on each item
      * @param [context] {Object} optional context object
-     * @member KISSY
+     * @member util
      * @return {Boolean} whether some element in the array passes the test implemented by the provided function.
      */
     some: some ?
@@ -271,7 +271,7 @@ util.mix(util, {
      * https://github.com/petkaantonov/bluebird/wiki/Optimization-killers
      * @param o {object|Array} array like object or array
      * @return {Array} native Array
-     * @member KISSY
+     * @member util
      */
     makeArray: function (o) {
         if (o == null) {

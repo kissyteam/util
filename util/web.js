@@ -5,8 +5,6 @@
  */
 
 var util = require('./base');
-var LoggerManager = require('logger-manager');
-var logger = LoggerManager.getLogger('util');
 var win = typeof window !== 'undefined' ? window : {},
     undef,
     doc = win.document || {},
@@ -42,7 +40,7 @@ var win = typeof window !== 'undefined' ? window : {},
 util.mix(util, {
     /**
      * A crude way of determining if an object is a window
-     * @member KISSY
+     * @member util
      */
     isWindow: function (obj) {
         // must use == for ie8
@@ -53,7 +51,7 @@ util.mix(util, {
     /**
      * get xml representation of data
      * @param {String} data
-     * @member KISSY
+     * @member util
      */
     parseXml: function (data) {
         // already a xml
@@ -61,30 +59,24 @@ util.mix(util, {
             return data;
         }
         var xml;
-        try {
-            // Standard
-            if (win.DOMParser) {
-                xml = new DOMParser().parseFromString(data, 'text/xml');
-            } else { // IE
-                /*global ActiveXObject*/
-                xml = new ActiveXObject('Microsoft.XMLDOM');
-                xml.async = false;
-                xml.loadXML(data);
-            }
-        } catch (e) {
-            logger.error('parseXML error :');
-            logger.error(e);
-            xml = undef;
+        // Standard
+        if (win.DOMParser) {
+            xml = new DOMParser().parseFromString(data, 'text/xml');
+        } else { // IE
+            /*global ActiveXObject*/
+            xml = new ActiveXObject('Microsoft.XMLDOM');
+            xml.async = false;
+            xml.loadXML(data);
         }
         if (!xml || !xml.documentElement || xml.getElementsByTagName('parsererror').length) {
-            util.error('Invalid XML: ' + data);
+            throw new Error('Invalid XML: ' + data);
         }
         return xml;
     },
 
     /**
      * Evaluates a script in a global context.
-     * @member KISSY
+     * @member util
      */
     globalEval: function (data) {
         if (data && RE_NOT_WHITESPACE.test(data)) {
@@ -105,7 +97,7 @@ util.mix(util, {
      * Specify a function to execute when the Dom is fully loaded.
      * @param fn {Function} A function to execute after the Dom is ready
      * @chainable
-     * @member KISSY
+     * @member util
      */
     ready: function (fn) {
         if (domReady) {
@@ -130,7 +122,7 @@ util.mix(util, {
      * Executes the supplied callback when the item with the supplied id is found.
      * @param id {String} The id of the element, or an array of ids to look for.
      * @param fn {Function} What to execute when the element is found.
-     * @member KISSY
+     * @member util
      */
     available: function (id, fn) {
         id = (id + EMPTY).match(RE_ID_STR)[1];
