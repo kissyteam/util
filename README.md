@@ -1,6 +1,6 @@
 # util
 
-a middleware to instrument javascript files using node-jscover
+common utilities
 
 ## example
 

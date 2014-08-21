@@ -1,6 +1,6 @@
 {
     "name": "modulex-util",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "author": "yiminghe <yiminghe@gmail.com>",
     "engines": {
         "node": "~0.10"
@@ -9,6 +9,6 @@
     "main": "util.js",
     "repository": {
         "type": "git",
-        "url": "http://github.com/yiminghe/node-jscover-handler.git"
+        "url": "http://github.com/kissyteam/util.git"
     }
 }
