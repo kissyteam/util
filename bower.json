@@ -1,13 +1,16 @@
 {
     "name": "modulex-util",
     "author": "yiminghe <yiminghe@gmail.com>",
-    "engines": {
-        "node": "~0.10"
-    },
     "license": "MIT",
-    "ignore": ["**/*", "!util.js", "!lib/**/*"],
     "repository": {
         "type": "git",
         "url": "http://github.com/kissyteam/util.git"
-    }
+    },
+    "dependencies": {
+        "modulex": "modulex#master"
+    },
+    "ignore": [
+        "**/*",
+        "!build/**/*"
+    ]
 }

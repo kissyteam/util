@@ -16,5 +16,13 @@
     "unused": true,
     "browser": true,
     "node": true,
-    "es3": true
+    "es3": true,
+    "globals": {
+        "describe": false,
+        "expect": false,
+        "beforeEach": false,
+        "afterEach": false,
+        "modulex": false,
+        "it": false
+    }
 }

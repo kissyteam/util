@@ -1,4 +1,5 @@
-lib/
+bower_components/
+tests/
 node_modules/
 nohup.out
 *.iml
