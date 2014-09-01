@@ -934,7 +934,7 @@ describe('util', function () {
         // when new ,ignore context
         t = new (util.bind(y, context, 1, 2))(3);
 
-        if (y.bind) {
+        if (y.bind && !window.callPhantom) {
             t = new (y.bind(context, 1, 2))(3);
         }
 
