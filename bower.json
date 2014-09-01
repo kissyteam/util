@@ -2,6 +2,7 @@
     "name": "modulex-util",
     "author": "yiminghe <yiminghe@gmail.com>",
     "license": "MIT",
+    "main": "build/util-debug.js",
     "repository": {
         "type": "git",
         "url": "http://github.com/kissyteam/util.git"
