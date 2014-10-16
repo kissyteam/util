@@ -8,7 +8,7 @@
         "url": "http://github.com/kissyteam/util.git"
     },
     "dependencies": {
-        "modulex": "modulex#master"
+        "modulex": "*"
     },
     "ignore": [
         "**/*",
