@@ -13,13 +13,26 @@ var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var jscs = require('gulp-jscs');
 var replace = require('gulp-replace');
-
+var wrapper = require('gulp-wrapper');
+var date = new Date();
+var header = ['/*',
+        'Copyright ' + date.getFullYear() + ', ' + packageInfo.name + '@' + packageInfo.version,
+        packageInfo.license + ' Licensed',
+        'build time: ' + (date.toGMTString()),
+    '*/', ''].join('\n');
+    
 gulp.task('lint', function () {
     return gulp.src('./lib/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter(stylish))
         .pipe(jshint.reporter('fail'))
         .pipe(jscs());
+});
+
+gulp.task('tag',function(done){
+    var cp = require('child_process');
+    var version = packageInfo.version;
+    cp.exec('git tag '+version +' | git push origin '+version+':'+version+' | git push origin master:master',done);
 });
 
 gulp.task('clean', function () {
@@ -48,6 +61,9 @@ gulp.task('build', ['lint'], function () {
             ]
         }))
         .pipe(replace(/@VERSION@/g, packageInfo.version))
+        .pipe(wrapper({
+                    header: header
+                }))
         .pipe(gulp.dest(build))
         .pipe(filter('util-debug.js'))
         .pipe(replace(/@DEBUG@/g, ''))
