@@ -7,7 +7,7 @@
         "type": "git",
         "url": "http://github.com/kissyteam/util.git"
     },
-    "dependencies": {
+    "devDependencies": {
         "modulex": "*"
     },
     "ignore": [
