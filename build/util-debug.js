@@ -1,7 +1,7 @@
 /*
-Copyright 2014, modulex-util@1.1.3
+Copyright 2014, modulex-util@1.1.4
 MIT Licensed
-build time: Thu, 16 Oct 2014 04:00:32 GMT
+build time: Mon, 01 Dec 2014 04:23:46 GMT
 */
 modulex.add("util", [], function(require, exports, module) {
 
@@ -28,7 +28,7 @@ utilBase = function (exports) {
    * @singleton
    */
   exports = {
-    version: '1.1.3',
+    version: '1.1.4',
     _debug: '@DEBUG@',
     mix: function (to, from) {
       for (var i in from) {
@@ -975,7 +975,7 @@ _util_ = function (exports) {
   utilJson;
   utilWeb;
   exports = utilBase;
-  module.exports.version = '1.1.3';
+  module.exports.version = '1.1.4';
   return exports;
 }();
 module.exports = _util_;
