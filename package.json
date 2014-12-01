@@ -51,6 +51,9 @@
         "gulp-wrapper": "^0.1.5",
         "serve-static": "^1.5.3"
     },
+    "spm": {
+        "main": "lib/util.js"
+    },
     "precommit": [
         "lint"
     ],
