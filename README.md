@@ -9,8 +9,6 @@ common utilities
 [![Dependency Status](https://gemnasium.com/kissyteam/util.png)](https://gemnasium.com/kissyteam/modulex-util)
 [![Bower version](https://badge.fury.io/bo/modulex-util.svg)](http://badge.fury.io/bo/modulex-util)
 
-[![browser support](https://ci.testling.com/kissyteam/util.png)](https://ci.testling.com/kissyteam/util)
-
 ## api
 
 http://docs.kissyui.com/5.0/api/modules/util.html

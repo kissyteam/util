@@ -10,19 +10,6 @@
     "type": "git",
     "url": "http://github.com/kissyteam/util.git"
   },
-  "testling": {
-    "server": "server.js",
-    "html": "tests/runner.html",
-    "browsers": [
-      "ie/6..latest",
-      "chrome/latest",
-      "firefox/latest",
-      "safari/latest",
-      "iphone/6..lastest",
-      "ipad/6..latest",
-      "android-browser/latest"
-    ]
-  },
   "devDependencies": {
     "body-parser": "^1.6.5",
     "chai": "^1.9.1",
