@@ -1,5 +1,7 @@
 var util = require('../');
 var expect = require('expect.js');
+// es-shim bug
+var ie8 = navigator.userAgent.indexOf('MSIE 8.0') !== -1;
 /*jshint quotmark:false*/
 
 describe('util', function () {
@@ -608,8 +610,9 @@ describe('util', function () {
     expect(util.isEmptyObject({})).to.equal(true);
 
     expect(util.isEmptyObject({a: 1})).to.equal(false);
-    expect(util.isEmptyObject([])).to.equal(true);
-
+    if (!ie8) {
+      expect(util.isEmptyObject([])).to.equal(true);
+    }
     // Failed in Safari/Opera
     //expect(util.isEmptyObject(fn)).to.equal(true);
   });
@@ -832,13 +835,13 @@ describe('util', function () {
 
   it('util.indexOf', function () {
     var a;
-
     expect(util.indexOf(6, [1, 2, 3, 4, 5])).to.equal(-1);
     expect(util.indexOf(2, [1, 2, 3, 4, 5])).to.equal(1);
     expect(util.indexOf(2, [1, 2, 3, 4, 5], 1)).to.equal(1);
     expect(util.indexOf(2, [1, 2, 3, 4, 5], 2)).to.equal(-1);
-
-    expect(util.indexOf(a, [1, 2, 3, 4, undefined])).to.equal(4);
+    if (!ie8) {
+      expect(util.indexOf(a, [1, 2, 3, 4, undefined])).to.equal(4);
+    }
     expect(util.indexOf({}, [1, 2, 3, 4, undefined])).to.equal(-1);
   });
 
@@ -865,11 +868,11 @@ describe('util', function () {
 
   it('util.inArray', function () {
     var a;
-
     expect(util.inArray(2, [1, 2, 3, 4, 5])).to.equal(true);
     expect(util.inArray(6, [1, 2, 3, 4, 5])).to.equal(false);
-
-    expect(util.inArray(a, [1, 2, 3, 4, undefined])).to.equal(true);
+    if (!ie8) {
+      expect(util.inArray(a, [1, 2, 3, 4, undefined])).to.equal(true);
+    }
     expect(util.inArray({}, [1, 2, 3, 4, {}])).to.equal(false);
   });
 
