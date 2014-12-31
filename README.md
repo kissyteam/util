@@ -1,13 +1,35 @@
 # util
+---
 
 common utilities
 
-[![modulex-util](https://nodei.co/npm/modulex-util.png)](https://npmjs.org/package/modulex-util)
-[![NPM downloads](http://img.shields.io/npm/dm/modulex-util.svg)](https://npmjs.org/package/modulex-util)
-[![Build Status](https://secure.travis-ci.org/kissyteam/util.png?branch=master)](https://travis-ci.org/kissyteam/util)
-[![Coverage Status](https://img.shields.io/coveralls/kissyteam/util.svg)](https://coveralls.io/r/kissyteam/util?branch=master)
-[![Dependency Status](https://gemnasium.com/kissyteam/util.png)](https://gemnasium.com/kissyteam/modulex-util)
-[![Bower version](https://badge.fury.io/bo/modulex-util.svg)](http://badge.fury.io/bo/modulex-util)
+[![NPM version][npm-image]][npm-url]
+[![Bower version][bower-image]][bower-url]
+[![SPM version](http://spmjs.io/badge/modulex-util)](http://spmjs.io/package/modulex-util)
+[![build status][travis-image]][travis-url]
+[![Test coverage][coveralls-image]][coveralls-url]
+[![gemnasium deps][gemnasium-image]][gemnasium-url]
+[![node version][node-image]][node-url]
+[![npm download][download-image]][download-url]
+[![Sauce Test Status](https://saucelabs.com/buildstatus/modulex-util)](https://saucelabs.com/u/modulex-util)
+
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/modulex-util.svg)](https://saucelabs.com/u/modulex-util)
+
+
+[npm-image]: http://img.shields.io/npm/v/modulex-util.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/modulex-util
+[bower-image]: http://img.shields.io/bower/v/modulex-util.svg?style=flat-square
+[bower-url]: https://github.com/kissyteam/util
+[travis-image]: https://img.shields.io/travis/kissyteam/util.svg?style=flat-square
+[travis-url]: https://travis-ci.org/kissyteam/util
+[coveralls-image]: https://img.shields.io/coveralls/kissyteam/util.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/kissyteam/util?branch=master
+[gemnasium-image]: http://img.shields.io/gemnasium/kissyteam/util.svg?style=flat-square
+[gemnasium-url]: https://gemnasium.com/kissyteam/util
+[node-image]: https://img.shields.io/badge/node.js-%3E=_0.10-green.svg?style=flat-square
+[node-url]: http://nodejs.org/download/
+[download-image]: https://img.shields.io/npm/dm/modulex-util.svg?style=flat-square
+[download-url]: https://npmjs.org/package/modulex-util
 
 ## api
 

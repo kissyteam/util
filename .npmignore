@@ -1,5 +1,5 @@
 bower_components/
-tests/
+*.cfg
 node_modules/
 nohup.out
 *.iml
@@ -19,3 +19,6 @@ Thumbs.db
 .svn/
 *.swp
 out/
+build/
+spm_modules
+_site/
