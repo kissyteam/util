@@ -56,10 +56,8 @@ https://github.com/kissyteam/util/milestones
 
 ### prepare environment
 ```
-npm install bower -g
 npm install
-bower install
-node server
+npm start
 ```
 
 then open http://localhost:8001/tests/runner.html
