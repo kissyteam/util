@@ -1,9 +1,9 @@
 /*
-Copyright 2014, modulex-util@1.1.4
+Copyright 2015, modulex-util@1.1.6
 MIT Licensed
-build time: Mon, 01 Dec 2014 04:23:46 GMT
+build time: Thu, 22 Jan 2015 06:18:23 GMT
 */
-modulex.add("util", [], function(require, exports, module) {
+define("util", [], function(require, exports, module) {
 
 /*
 combined modules:
@@ -28,7 +28,7 @@ utilBase = function (exports) {
    * @singleton
    */
   exports = {
-    version: '1.1.4',
+    version: '1.1.6',
     _debug: '@DEBUG@',
     mix: function (to, from) {
       for (var i in from) {
@@ -44,6 +44,9 @@ utilBase = function (exports) {
 }();
 utilEscape = function (exports) {
   var util = utilBase;
+  var SEP = '&';
+  var EQ = '=';
+  var TRUE = true;
   var EMPTY = '', htmlEntities = {
       '&amp;': '&',
       '&gt;': '>',
@@ -60,6 +63,10 @@ utilEscape = function (exports) {
   }());
   escapeHtmlReg = getEscapeReg();
   unEscapeHtmlReg = getUnEscapeReg();
+  function isValidParamValue(val) {
+    var t = typeof val;
+    return val == null || t !== 'object' && t !== 'function';
+  }
   function getEscapeReg() {
     var str = EMPTY;
     for (var e in htmlEntities) {
@@ -100,6 +107,76 @@ utilEscape = function (exports) {
       return str.replace(unEscapeHtmlReg, function (m, n) {
         return htmlEntities[m] || String.fromCharCode(+n);
       });
+    },
+    param: function (o, sep, eq, serializeArray) {
+      sep = sep || SEP;
+      eq = eq || EQ;
+      if (serializeArray === undefined) {
+        serializeArray = TRUE;
+      }
+      var buf = [], key, i, v, len, val, encode = util.urlEncode;
+      for (key in o) {
+        val = o[key];
+        key = encode(key);
+        if (isValidParamValue(val)) {
+          buf.push(key);
+          if (val !== undefined) {
+            buf.push(eq, encode(val + EMPTY));
+          }
+          buf.push(sep);
+        } else if (util.isArray(val) && val.length) {
+          for (i = 0, len = val.length; i < len; ++i) {
+            v = val[i];
+            if (isValidParamValue(v)) {
+              buf.push(key, serializeArray ? encode('[]') : EMPTY);
+              if (v !== undefined) {
+                buf.push(eq, encode(v + EMPTY));
+              }
+              buf.push(sep);
+            }
+          }
+        }
+      }
+      buf.pop();
+      return buf.join(EMPTY);
+    },
+    unparam: function (str, sep, eq) {
+      if (typeof str !== 'string' || !(str = util.trim(str))) {
+        return {};
+      }
+      sep = sep || SEP;
+      eq = eq || EQ;
+      var ret = {}, eqIndex, decode = util.urlDecode, pairs = str.split(sep), key, val, i = 0, len = pairs.length;
+      for (; i < len; ++i) {
+        eqIndex = pairs[i].indexOf(eq);
+        if (eqIndex === -1) {
+          key = decode(pairs[i]);
+          val = undefined;
+        } else {
+          key = decode(pairs[i].substring(0, eqIndex));
+          val = pairs[i].substring(eqIndex + 1);
+          try {
+            val = decode(val);
+          } catch (e) {
+          }
+          if (util.endsWith(key, '[]')) {
+            key = key.substring(0, key.length - 2);
+          }
+        }
+        if (key in ret) {
+          if (util.isArray(ret[key])) {
+            ret[key].push(val);
+          } else {
+            ret[key] = [
+              ret[key],
+              val
+            ];
+          }
+        } else {
+          ret[key] = val;
+        }
+      }
+      return ret;
     }
   });
   util.escapeHTML = util.escapeHtml;
@@ -975,7 +1052,7 @@ _util_ = function (exports) {
   utilJson;
   utilWeb;
   exports = utilBase;
-  module.exports.version = '1.1.4';
+  module.exports.version = '1.1.6';
   return exports;
 }();
 module.exports = _util_;
