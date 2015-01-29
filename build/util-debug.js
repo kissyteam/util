@@ -1,7 +1,7 @@
 /*
 Copyright 2015, modulex-util@1.1.6
 MIT Licensed
-build time: Thu, 22 Jan 2015 06:18:23 GMT
+build time: Thu, 29 Jan 2015 11:11:02 GMT
 */
 define("util", [], function(require, exports, module) {
 
@@ -17,8 +17,9 @@ util/string
 util/type
 util/json
 util/web
+util/querystring
 */
-var utilBase, utilEscape, utilFunction, utilObject, utilString, utilType, utilJson, utilWeb, utilArray, _util_;
+var utilBase, utilEscape, utilFunction, utilObject, utilString, utilType, utilJson, utilWeb, utilQuerystring, utilArray, _util_;
 utilBase = function (exports) {
   var guid = 0, EMPTY = '';
   /**
@@ -47,6 +48,7 @@ utilEscape = function (exports) {
   var SEP = '&';
   var EQ = '=';
   var TRUE = true;
+  var HEX_BASE = 16;
   var EMPTY = '', htmlEntities = {
       '&amp;': '&',
       '&gt;': '>',
@@ -177,6 +179,11 @@ utilEscape = function (exports) {
         }
       }
       return ret;
+    },
+    fromUnicode: function (str) {
+      return str.replace(/\\u([a-f\d]{4})/gi, function (m, u) {
+        return String.fromCharCode(parseInt(u, HEX_BASE));
+      });
     }
   });
   util.escapeHTML = util.escapeHtml;
@@ -714,10 +721,12 @@ utilType = function (exports) {
       isArray: noop,
       isDate: noop,
       isRegExp: noop,
-      isObject: noop
+      isObject: noop,
+      isNull: noop,
+      isUndefined: noop
     });
   }
-  var types = 'Boolean Number String Function Date RegExp Object Array'.split(' ');
+  var types = 'Boolean Number String Function Date RegExp Object Array Null Undefined'.split(' ');
   for (var i = 0; i < types.length; i++) {
     (function (name, lc) {
       class2type['[object ' + name + ']'] = lc = name.toLowerCase();
@@ -898,6 +907,93 @@ utilWeb = function (exports) {
   }
   return exports;
 }();
+utilQuerystring = function (exports) {
+  var util = utilBase;
+  var SEP = '&', EMPTY = '', undef, urlEncode = encodeURIComponent, toString = {}.toString, EQ = '=';
+  function isValidParamValue(val) {
+    var t = typeof val;
+    return val == null || t !== 'object' && t !== 'function';
+  }
+  function isArray(o) {
+    return toString.apply(o) === '[object Array]';
+  }
+  function urlDecode(s) {
+    return decodeURIComponent(s.replace(/\+/g, ' '));
+  }
+  util.mix(util, {
+    param: function (o, sep, eq, serializeArray) {
+      sep = sep || SEP;
+      eq = eq || EQ;
+      if (serializeArray === undef) {
+        serializeArray = true;
+      }
+      var buf = [], key, i, v, len, val;
+      for (key in o) {
+        val = o[key];
+        var originalKey = key;
+        key = urlEncode(key);
+        if (isValidParamValue(val)) {
+          buf.push(key);
+          if (val !== undef) {
+            buf.push(eq, urlEncode(val + EMPTY));
+          }
+          buf.push(sep);
+        } else if (isArray(val)) {
+          for (i = 0, len = val.length; i < len; ++i) {
+            v = val[i];
+            if (isValidParamValue(v)) {
+              buf.push(key, serializeArray && originalKey.slice(0 - 2) !== '[]' ? urlEncode('[]') : EMPTY);
+              if (v !== undef) {
+                buf.push(eq, urlEncode(v + EMPTY));
+              }
+              buf.push(sep);
+            }
+          }
+        }
+      }
+      buf.pop();
+      return buf.join(EMPTY);
+    },
+    unparam: function (str, sep, eq) {
+      sep = sep || SEP;
+      eq = eq || EQ;
+      var ret = {}, eqIndex, key, val, pairs = str.split(sep), i = 0, len = pairs.length;
+      for (; i < len; ++i) {
+        eqIndex = pairs[i].indexOf(eq);
+        if (eqIndex === -1) {
+          key = urlDecode(pairs[i]);
+          val = undef;
+        } else {
+          key = urlDecode(pairs[i].substring(0, eqIndex));
+          val = pairs[i].substring(eqIndex + 1);
+          try {
+            val = urlDecode(val);
+          } catch (e) {
+            console.error('decodeURIComponent error : ' + val);
+            console.error(e);
+          }
+          if (key.slice(0 - 2) === '[]') {
+            key = key.slice(0, 0 - 2);
+          }
+        }
+        if (key in ret) {
+          if (isArray(ret[key])) {
+            ret[key].push(val);
+          } else {
+            ret[key] = [
+              ret[key],
+              val
+            ];
+          }
+        } else {
+          ret[key] = val;
+        }
+      }
+      return ret;
+    }
+  });
+  return exports;
+}();
 utilArray = function (exports) {
   var TRUE = true, undef, AP = Array.prototype, indexOf = AP.indexOf, lastIndexOf = AP.lastIndexOf, filter = AP.filter, every = AP.every, some = AP.some, util = utilBase, map = AP.map, FALSE = false;
   util.mix(util, {
@@ -1051,6 +1147,7 @@ _util_ = function (exports) {
   utilType;
   utilJson;
   utilWeb;
+  utilQuerystring;
   exports = utilBase;
   module.exports.version = '1.1.6';
   return exports;

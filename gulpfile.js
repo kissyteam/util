@@ -27,7 +27,7 @@ gulp.task('clean', function () {
     }).pipe(clean());
 });
 
-gulp.task('build', ['lint'], function () {
+gulp.task('build', function () {
     return gulp.src('./lib/util.js')
         .pipe(modulex({
             modulex: {
