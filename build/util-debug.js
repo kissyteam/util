@@ -1,8 +1,4 @@
-/*
-Copyright 2015, modulex-util@1.1.6
-MIT Licensed
-build time: Thu, 29 Jan 2015 11:11:02 GMT
-*/
+//! Copyright 2015, kissy-util@1.1.6 MIT Licensed, build time: Thu, 05 Feb 2015 06:58:06 GMT 
 define("util", [], function(require, exports, module) {
 
 /*

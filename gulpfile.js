@@ -15,11 +15,11 @@ var jscs = require('gulp-jscs');
 var replace = require('gulp-replace');
 var wrapper = require('gulp-wrapper');
 var date = new Date();
-var header = ['/*',
+var header = ['//!',
         'Copyright ' + date.getFullYear() + ', ' + packageInfo.name + '@' + packageInfo.version,
-        packageInfo.license + ' Licensed',
+        packageInfo.license + ' Licensed,',
         'build time: ' + (date.toGMTString()),
-    '*/', ''].join('\n');
+    '\n'].join(' ');
 
 gulp.task('clean', function () {
     return gulp.src(build, {
@@ -53,7 +53,9 @@ gulp.task('build', function () {
         .pipe(gulp.dest(build))
         .pipe(filter('util-debug.js'))
         .pipe(replace(/@DEBUG@/g, ''))
-        .pipe(uglify())
+		.pipe(uglify({
+			preserveComments: 'some'
+		 }))
         .pipe(rename('util.js'))
         .pipe(gulp.dest(build));
 });
