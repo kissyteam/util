@@ -11,6 +11,16 @@
 
 版本号
 
+#### 库与框架必备工具
+
+**ready(fn)**
+
+用于注册DOMReady时的监听事件，若DOM已然ready，直接指定回调的方法。这个方式是所有的JS库和框架必备的神器，所以不需要多做介绍。
+
+**noop()**
+
+一个空方法。可以用作默认的callback填充方法，这样就不需要到处创建空的默认方法了。jQuery、angular等都配备了这个实际上没用的方法。
+
 #### 类型判断 isXxx系列
 
 **type(o)**
@@ -152,6 +162,14 @@ _这个方法有问题 {}, true, false, 0, 1234, "", undefined... 很多都返�
 
 调用`decodeURIComponent`，但会先把字符串中的`+`号转成空格。
 
+#### 数组|对象混合工具
+
+广义上讲，数组或类数组是一种以数字作为属性名的特殊对象。所以很多方法，既可以用于数组，也可以用于对象。
+
+**each(object, fn, context)**
+
+用来遍历对象的属性键值（v-k，对数组或类数组来说，k是index）对，并对每个属性执行一次`fn(v, k)`，`context`用以指定`fn`中的`this`。当应用于数组是，“类似”于ECMA-5的[`Array.prototype.forEach(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)，不同的是，这里可以以`return false`的方式提前结束。
+
 #### 对象工具
 
 **keys(o)**
@@ -160,17 +178,64 @@ _这个方法有问题 {}, true, false, 0, 1234, "", undefined... 很多都返�
 
 #### 数组工具
 
+**makeArray(o)**
+
+创建数组，若传入的参数为`undefined`或`null`，返回一个新德空数组；若传入的是数组，直接返回；传入的对象含有`length`属性时，尝试转成数组并返回。
+
+该方法纯属鸡肋，只有在将类数组（如`arguments`）转换成真正的数组的时候有用。而且，无法转换如`options`这样类数组的HTML集合。
+
+**indexOf(item, arr\[, fromIndex\])**
+
+查找`item`在`arr`中第一次出现的位置，`fromIndex`用以指定从哪个位置开始找起，默认为0。
+
+注意：`util.indexOf("1", "1234")`也能返回正确的`0`，但这并不说明这么用是正确的，它能正确返回的原因是`String`的下标访问方式。所以`util.indexOf("12", "1234") = -1`。对于字符串，请使用`string.indexOf(substr)`。
+
+**lastIndexOf(item, arr\[, fromIndex\])**
+
+与`indexOf`类似，查找`item`在`arr`中最后一次出现的位置，`fromIndex`默认为`arr.length - 1`。同样注意，不要用在`String`上。
+
+**inArray(item, arr)**
+
+判断`item`是否在`arr`中。跟`jQuery`的`inArray`返回的结果是数字（jQuery的`inArray`其实是`indexOf`）不同，这里返回布尔值`true/false`。
+
+**every(arr, fn\[, context\])**
+
+遍历数组，若每个元素`fn(v, k)`都返回真值（不一定要`true`），则整个表达式返回`true`；否则提前结束遍历，表达式返回`false`。`context`指代`fn`中的`this`。ECMA-5中[`Array.protoype.every(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)的替代品。
+
+**some(arr, fn\[, context\])**
+
+遍历数组，若某个元素`fn(v, k)`返回真值（不一定要`true`），则提前结束遍历，表达式返回`true`；若所有元素都不返回真值，返回`false`。`context`同上。ECMA-5中[`Array.protoype.some(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)的替代品。
+
+**filter(arr, fn\[, context\])**
+
+遍历数组，将`fn(v, k)`返回`true`的`v`组成一个新的数组，新数组的长度小于等于原数组，用于将`arr`中符合条件的值过滤出来。`context`同上。ECMA-5中[`Array.protoype.filter(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)的替代品。
+
+**map(arr, fn\[, context\])**
+
+遍历数组，把`fn(v, k)`的返回值组成一个新的数组，用于将数组“映射”成一个等长的新数组。ECMA-5中[`Array.protoype.map(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)的替代品。
+
+**reduce(arr, callback, initialValue)**
+
+
+
 #### 函数工具
-
-**noop()**
-
-一个空方法。可以用作默认的callback填充方法，这样就不需要到处创建空的默认方法了。
 
 **bind()**
 
+**rbind()**
 
 
+#### 时间工具
 
+**now()**
+
+返回当前客户端的时间毫秒数（当前时间与1970-01-01 00:00:00 UTC的毫秒差），相当于`new Date().getTime()`。ECMA-5中[`Date.now()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now)的替代品。
+
+**通用工具**
+
+**equals(a, b)**
+
+判断`a`与`b`是否等价。一般的`==`或`===`，对于简单类型的数据比较还行，但对于引用类型则无能为力，因为它只能简单地判断两者的引用是否相等，即只能判定两则是否是同一个东西。`util.equals(a, b)`提供了真正判断两个对象是否“内容上相等”的能力。
 
 
 
@@ -185,41 +250,17 @@ _这个方法有问题 {}, true, false, 0, 1234, "", undefined... 很多都返�
 
 **clone(input, filter)**
 
-**each(object, fn, context)**
-
-
-
-**equals(a, b)**
-
-**every(arr, fn, context)**
-
 **extend(r, s, px, sx)**
-
-**filter(arr, fn, context)**
 
 **globalEval(data)**
 
-**inArray(item, arr)**
-
-**indexOf(item, arr, fromIndex)**
-
-
-
-**lastIndexOf(item, arr, fromIndex)**
-
 **later(fn, when, periodic, context, data)**
-
-**makeArray(o)**
-
-**map(arr, fn, context)**
 
 **merge(varArgs)**
 
 **mix(r, s, ov, wl, deep)**
 
 **namespace(name, holder)**
-
-**now:now()**
 
 **param(o, sep, eq, serializeArray)**
 
@@ -228,14 +269,6 @@ _这个方法有问题 {}, true, false, 0, 1234, "", undefined... 很多都返�
 **parseXML(data)**
 
 **parseXml(data)**
-
-**rbind()**
-
-**ready(fn)**
-
-**reduce(arr, callback, initialValue)**
-
-**some(arr, fn, context)**
 
 **stamp(o, readOnly, marker)**
 
@@ -246,5 +279,3 @@ _这个方法有问题 {}, true, false, 0, 1234, "", undefined... 很多都返�
 **unique(a, override)**
 
 **unparam(str, sep, eq)**
-
-
