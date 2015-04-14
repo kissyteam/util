@@ -214,9 +214,31 @@ _这个方法有问题 {}, true, false, 0, 1234, "", undefined... 很多都返�
 
 遍历数组，把`fn(v, k)`的返回值组成一个新的数组，用于将数组“映射”成一个等长的新数组。ECMA-5中[`Array.protoype.map(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)的替代品。
 
-**reduce(arr, callback, initialValue)**
+**reduce(arr, fn\[, initialValue\])**
 
+TODO：代码中其他地方都叫fn，这里叫callback
 
+遍历数组，`fn(previousValue/** 上一次调用回调返回的值，或者是提供的初始值 */, currentValue/** 当前被处理的元素 */, index/** 当前元素索引 */, arr/** 数组本身 */)`作为累加器把数组中的每个值（从左到右）开始缩减，最终为一个值。ECMA-5中[`Array.protoype.reduce(fn, initialValue)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)的替代品。
+
+用于求和：
+
+```javascript
+modulex.use("util", function(util) {
+	console.info(util.reduce([0, 1, 2, 3, 4], function(previousValue, currentValue, index, array) {// 110
+		return previousValue + currentValue;
+	}, 100));
+});
+```
+
+用于扁平化数组：
+
+```javascript
+modulex.use("util", function(util) {
+	console.info(util.reduce([[1, 2], [3, 4, 5]], function(previousValue, currentValue, index, array) {// [1, 2, 3, 4, 5]
+		return previousValue.concat(currentValue);
+	}));
+});
+```
 
 #### 函数工具
 
@@ -235,7 +257,83 @@ _这个方法有问题 {}, true, false, 0, 1234, "", undefined... 很多都返�
 
 **equals(a, b)**
 
-判断`a`与`b`是否等价。一般的`==`或`===`，对于简单类型的数据比较还行，但对于引用类型则无能为力，因为它只能简单地判断两者的引用是否相等，即只能判定两则是否是同一个东西。`util.equals(a, b)`提供了真正判断两个对象是否“内容上相等”的能力。
+判断`a`与`b`是否等价。一般的`==`或`===`，对于简单类型的数据比较还行，但对于引用类型则无能为力，因为它只能简单地判断两者的引用是否相等，即只能判定两则是否是同一个东西。`util.equals(a, b)`提供了真正判断两个对象是否“内容上相等”的能力。以下是两者的对比：
+
+o1, o2 | o1 == o2 | o1 === o2 | util.equals(o1, o2) | 说明
+-- | -- | -- | -- | --
+undefined, undefined | true | true | true | -
+null, null | true | true | true | -
+undefined, null | true | false | true | 未处理JS的不足，易出错
+NaN, NaN | false | false | false | 未处理JS的不足
+"", "" | true | true | true | -
+"", new String("") | true | false | false | 包裹对象确实与字面量应该不同
+new String(""), new String("") | false | false | true | 对象等价
+0, 0 | true | true | true | -
+0, new Number(0) | true | false | false | 包裹对象确实与字面量应该不同
+new Number(0), new Number(0) | false | false | true | 
+false, false | true | true | true | -
+false, Boolean {} | true | false | false | 包裹对象确实与字面量应该不同
+new Boolean(false), new Boolean(false) | false | false | true | 对象等价
+{}, {} | false | false | true | 对象等价
+{}, new Object | false | false | true | 对象等价
+new Object, new Object | false | false | true | 对象等价
+new Object, new Object | false | false | true | 对象等价
+{}, new (function() {})() | false | false | true | 对象等价
+[], [] | false | false | true | 数组等价
+[], new Array | false | false | true | 数组等价
+new Array, new Array | false | false | true | 数组等价
+/\w+/, /\w+/ | false | false | true | ECMA-5之前同一个正则字面量可能共享一个实例，故前两个判断可能也为true
+/\w+/, new RegExp("\\w\+")] | false | false | true | 对象等价，正则字面量也是对象
+new RegExp("\\w\+"), new RegExp("\\w\+") | false | false | true | 对象等价
+function(), function() | false | false | false | 方法没有等价性
+function(), new Function | false | false | false | 方法没有等价性
+new Function, new Function | false | false | false | 方法没有等价性
+new Date, new Date | false | false | true | 连续调用的new Date很少有可能不同，因为时间不太可能超过1ms
+window, window | true | true | true | -
+document, document | true | true | true | -
+
+以上结论，可通过以下代码验证：
+
+```javascript
+modulex.use("util", function(util) {
+	var arr = [
+		[undefined, undefined],
+		[null, null],
+		[undefined, null],
+		[NaN, NaN],
+		["", ""],
+		["", new String("")],
+		[new String(""), new String("")],
+		[0, 0],
+		[0, new Number(0)],
+		[new Number(0), new Number(0)],
+		[false, false],
+		[false, new Boolean(false)],
+		[new Boolean(false), new Boolean(false)],
+		[{}, {}],
+		[{}, new Object],
+		[new Object, new Object],
+		[{}, new (function() {})()],
+		[new (function() {})(), new (function() {})()],
+		[[], []],
+		[[], new Array],
+		[new Array, new Array],
+		[/\w+/, /\w+/],
+		[/\w+/, new RegExp("\\w\+")],
+		[new RegExp("\\w\+"), new RegExp("\\w\+")],
+		[function() {}, function() {}],
+		[function() {}, new Function],
+		[new Function, new Function],
+		[new Date, new Date],
+		[window, window],
+		[document, document]
+	];
+	console.info("v[0] == v[1]\tv[0] === v[1]\tutil.equals(v[0], v[1])\tv");
+	util.each(arr, function(v) {
+		console.info(v[0] == v[1], "\t\t", v[0] === v[1], "\t\t", util.equals(v[0], v[1]), "\t\t", v);
+	});
+});
+```
 
 
 
