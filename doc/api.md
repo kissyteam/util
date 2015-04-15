@@ -19,7 +19,7 @@
 
 **参数**
 
-fn:Function DOMReady的回调函数。
+* fn:Function DOMReady的回调函数。
 
 **demo**
 
@@ -59,7 +59,7 @@ modulex.add(function(require) {
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -103,7 +103,7 @@ modulex.use("util", function(util) {
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -124,7 +124,7 @@ modulex.use("util", function(util) {
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -145,7 +145,7 @@ modulex.use("util", function(util) {
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -165,7 +165,7 @@ modulex.use("util", function(util) {
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -188,7 +188,7 @@ modulex.use("util", function(util) {
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -255,7 +255,7 @@ _BUGGY_ `isObject`对`window`、`document`也判定为`true`。
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -282,7 +282,7 @@ _BUGGY_ 这个方法有问题 {}, true, false, 0, 1234, "", undefined... 很多�
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -310,7 +310,7 @@ modulex.use("util", function(util) {
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -341,7 +341,7 @@ modulex.use("util, json", function(util, JSON) {
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -362,7 +362,7 @@ modulex.use("util", function(util) {
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -383,7 +383,7 @@ modulex.use("util", function(util) {
 
 **参数**
 
-o:* 任意类型数据
+* o:* 任意类型数据
 
 **demo**
 
@@ -413,7 +413,7 @@ modulex.use("util", function(util) {
 
 **参数**
 
-prefix:String 可选前缀
+* prefix:String 可选前缀
 
 ```javascript
 modulex.use("util", function(util) {
@@ -436,7 +436,7 @@ _NEW since Version 5_ _DEPRECATED_
 
 **参数**
 
-str:String
+* str:String
 
 ```javascript
 modulex.use("util", function(util) {
@@ -449,108 +449,116 @@ modulex.use("util", function(util) {
 
 ##### escapeHTML(str)|escapeHtml(str)
 
+_TODO_ make escapeHTML deprecated
+
 将字符``& > < ` / " '``替换成对应的HTML的实体``&amp; &gt; &lt; &#x60; &#x2F; &quot; &#x27;``，以便安全地展示在HTML页面中。
 
 **参数**
 
-str:String
+* str:String 可能含有HTML敏感的字符。
 
 **demo**
 
-```
+```javascript
 modulex.use("util", function(util) {
 	function output(what) {
-		console.info(util.XXX(what));
+		console.info(util.escapeHtml(what));
 	}
+	output("code `<input type='input' value=\"shit\" />` is stupid & useless");// code &#x60;&lt;input type=&#x27;input&#x27; value=&quot;shit&quot; &#x2F;&gt;&#x60; is stupid &amp; useless
 });
 ```
 
 ##### unEscapeHTML(str)|unEscapeHtml(str)
 
+_TODE_ make unEscapeHTML deprecated, and maybe "unescape"?
+
 顾名思义，与`escapeHTML`反向的动作。
 
 **参数**
 
-str:String
+* str:String HTML片段。
 
 **demo**
 
-```
+```javascript
 modulex.use("util", function(util) {
 	function output(what) {
-		console.info(util.XXX(what));
+		console.info(util.unEscapeHtml(what));
 	}
+	output("code &#x60;&lt;input type=&#x27;input&#x27; value=&quot;shit&quot; &#x2F;&gt;&#x60; is stupid &amp; useless");// code `<input type='input' value=\"shit\" />` is stupid & useless
 });
 ```
 
 ##### escapeRegExp(str)
 
-用于将用户输入的字符串中的正则敏感的元字符进行转义后。
+将字符串中的正则敏感的元字符`{ } [ ] ( ) . \ / + - ? * |`以及空白字符进行转义。适用于`new RegExp(input)`，`input`为用户输入的不可控字符串时，比如在当然文档中搜索用户指定的字符串。
 
 **参数**
 
-str:String
+* str:String 用户输入的字符串，可能含有正则的元字符和空白字符。
 
 **demo**
 
-```
+```javascript
 modulex.use("util", function(util) {
-	function output(what) {
-		console.info(util.XXX(what));
-	}
+	var userInput = "nothing (else) matters [metallica]{the black album? | metallica*同名专辑}",
+		userInputEscaped = util.escapeRegExp(userInput);
+	console.info(userInputEscaped);// nothing\ \(else\)\ matters\ \[metallica\]\{the\ black\ album\?\ \|\ metallica\*同名专辑\}
+	console.info(new RegExp(userInputEscaped).toString());// /nothing\ \(else\)\ matters\ \[metallica\]\{the\ black\ album\?\ \|\ metallica\*同名专辑\}/
 });
 ```
 
 ##### startsWith(str, prefix)
 
-判断字符串`str`是否以`prefix`打头。ECMA-5原生`String.prototype.startsWith(prefix)`的替代。
+判断字符串`str`是否以`prefix`打头。ECMA-6原生[`String.prototype.startsWith(prefix)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith)的替代，但没有可选的`position`参数。
 
 **参数**
 
-str:String
+* str:String 待测试的字符串
+* prefix:String 是否以此打头
 
 **demo**
 
-```
+```javascript
 modulex.use("util", function(util) {
-	function output(what) {
-		console.info(util.XXX(what));
-	}
+	console.info(util.startsWith("firefox", "fire"));// true
+	console.info(util.startsWith("chrome", "fire"));// false
 });
 ```
 ##### endsWith(str, suffix)
 
-判断字符串`str`是否以`suffix`打头。ECMA-5原生`String.prototype.endsWith(suffix)`的替代。
+判断字符串`str`是否以`suffix`打头。ECMA-6原生[`String.prototype.endsWith(suffix)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith)的替代，但没有可选的`position`参数。
 
 **参数**
 
-str:String
+* str:String 待测试的字符串
+* suffix:String 是否以此结尾
 
 **demo**
 
-```
+```javascript
 modulex.use("util", function(util) {
-	function output(what) {
-		console.info(util.XXX(what));
-	}
+	console.info(util.endsWith("firefox", "fox"));// true
+	console.info(util.endsWith("chrome", "fox"));// false
 });
 ```
 
 ##### trim(str)
 
-去除字符串头尾空格。ECMA-5原生`String.prototype.trim()`的替代。
+去除字符串头尾空格。ECMA-5原生[`String.prototype.trim()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim)的替代。
 
 **参数**
 
-str:String
+* str:String
 
 **demo**
 
-```
+```javascript
 modulex.use("util", function(util) {
-	function output(what) {
-		console.info(util.XXX(what));
+	function output(str) {
+		console.info("\"" + util.trim(str) + "\"");
 	}
+	output("  \t\n   全角半角space tab  回车换行   \r\n ");// "全角半角space tab  回车换行"
 });
 ```
 
@@ -560,15 +568,24 @@ modulex.use("util", function(util) {
 
 **参数**
 
-str:String
+* str:String 包含替换点的字符串
+* o:Object key-value对象
+* regexp:RegExp 可选的正则表达式 默认为`/{\w+}/`
 
 **demo**
 
-```
+```javascript
 modulex.use("util", function(util) {
-	function output(what) {
-		console.info(util.XXX(what));
+	function output(str, o, regexp) {
+		console.info(util.substitute(str, o, regexp));
 	}
+	var o = {
+		what: "matters"
+	};
+	output("nothing else {what}.", o);// nothing else matters.
+	output("nothing else \\{what}.", o);// nothing else {what}.
+	output("nothing else $[what].", o, /\$\[\w+\]/);// nothing else .
+	output("nothing else $[what].", o, /\$\[(\w+)\]/);// nothing else matters.
 });
 ```
 
@@ -578,33 +595,30 @@ modulex.use("util", function(util) {
 
 **参数**
 
-str:String
+* str:String
 
 **demo**
 
-```
+```javascript
 modulex.use("util", function(util) {
-	function output(what) {
-		console.info(util.XXX(what));
-	}
+	console.info(util.urlEncode("哥特 金属"));// %E5%93%A5%E7%89%B9%20%E9%87%91%E5%B1%9E
 });
 ```
 
 ##### urlDecode(str)
 
-调用`decodeURIComponent`，但会先把字符串中的`+`号转成空格。
+调用`decodeURIComponent`，但会先把字符串中的`+`号转成空格。_这种进出不能完全反过来的做法，其实实不可取的。_
 
 **参数**
 
-str:String
+* str:String
 
 **demo**
 
-```
+```javascript
 modulex.use("util", function(util) {
-	function output(what) {
-		console.info(util.XXX(what));
-	}
+	console.info(util.urlDecode("%E5%93%A5%E7%89%B9%20%E9%87%91%E5%B1%9E"));// 哥特 金属
+	console.info(util.urlDecode("%E5%93%A5%E7%89%B9+%E9%87%91%E5%B1%9E"));// 哥特 金属
 });
 ```
 
@@ -616,33 +630,67 @@ modulex.use("util", function(util) {
 
 **参数**
 
-str:String
+* str:String 含有`\u####`的字符串。
 
 **demo**
 
-```
+```javascript
 modulex.use("util", function(util) {
-	function output(what) {
-		console.info(util.XXX(what));
-	}
+	console.info(util.fromUnicode("\u7acb\u82b1\u91cc\u5b50"));// 立花里子
 });
 ```
 
 ##### param(o\[, sep\[, eq\[, serializeArray\]\]\])
 
-序列化对象或数组，
+序列化对象或数组，生成HTML可用的参数`a=a&b=b`的形式，也可以通过参数定制的方式生成所需的格式。
 
 **参数**
 
-str:String
+* o:* 待序列化的数据
+* sep:String 可选，参数对与参数之对间的分隔符，默认`&`
+* eq:String 可选，参数对中名字与值的连接符，默认`=`
+* serializeArray:Boolean 可选
 
 **demo**
 
-```
+`util.param()`与`jQuery.param()`对比：
+
+o | util.param(o) | jQuery.param(o) | 说明
+-- | -- | -- | --
+true | "" | "" | -
+123 | "" | "" | -
+"hello" | "0=h&1=e&2=l&3=l&4=o" | "0=h&1=e&2=l&3=l&4=o" | -
+[1, 2, 3] | 0=1&1=2&2=3" | "undefined=&undefined=&undefined=" | jQuery似乎更不知所措一些
+{ "a shit": "some thing" } | "a%20shit=some%20thing" | "a+shit=some+thing" | 处理空格的不同 KISSY用`%20`而jQuery的是`+`
+{ a: ["a", "b"], "b b": 3,
+		ignored: {
+			reason: "object ignored"
+		}
+	} | "a%5B%5D=a&a%5B%5D=b&b%20b=3"	"a%5B%5D=a&a%5B%5D=b&b+b=3&ignored%5Breason%5D=object+ignored"
+
+"a=1&b=the%20%E9%80%BC"	"a=1&b=the+%E9%80%BC"
+
+注意：一下代码需要在有KISSY和jQuery的环境下测试。
+
+```javascript
 modulex.use("util", function(util) {
-	function output(what) {
-		console.info(util.XXX(what));
+	function output() {
+		console.info("\"" + util.param.apply(util, arguments) + "\"");
 	}
+	util.each([true, 123, "hello", [1, 2, 3], {
+		a: 1,
+		b: "the 逼"
+	}, {
+		"a shit": "some thing"
+	}, {
+		a: ["a", "b"],
+		"b b": 3,
+		ignored: {
+			reason: "object ignored"
+		}
+	}], function(v) {
+		console.info("\"" + util.param(v) + "\"\t\"" + jQuery.param(v) + "\"");
+	});
 });
 ```
 
@@ -1009,6 +1057,8 @@ modulex.use("util", function(util) {
 
 ##### equals(a, b)
 
+_BUGGY_ 所有的正则式，不论是字面量还是new出来的都等价。
+
 判断`a`与`b`是否等价。一般的`==`或`===`，对于简单类型的数据比较还行，但对于引用类型则无能为力，因为它只能简单地判断两者的引用是否相等，即只能判定两则是否是同一个东西。`util.equals(a, b)`提供了真正判断两个对象是否“内容上相等”的能力。
 
 **参数**
@@ -1044,6 +1094,7 @@ new Object, new Object | false | false | true | 对象等价
 [], new Array | false | false | true | 数组等价
 new Array, new Array | false | false | true | 数组等价
 /\w+/, /\w+/ | false | false | true | ECMA-5之前同一个正则字面量可能共享一个实例，故前两个判断可能也为true
+/\w{1,4}/, /\d+/ | false | false | true | <strong style="color: #C00;">BUG</strong> 所有的正则式都等价了，angular.equals是OK的
 /\w+/, new RegExp("\\w\+")] | false | false | true | 对象等价，正则字面量也是对象
 new RegExp("\\w\+"), new RegExp("\\w\+") | false | false | true | 对象等价
 function(), function() | false | false | false | 方法没有等价性
@@ -1080,6 +1131,7 @@ modulex.use("util", function(util) {
 		[[], new Array],
 		[new Array, new Array],
 		[/\w+/, /\w+/],
+		[/\w{1,4}/, /\d+/],
 		[/\w+/, new RegExp("\\w\+")],
 		[new RegExp("\\w\+"), new RegExp("\\w\+")],
 		[function() {}, function() {}],
