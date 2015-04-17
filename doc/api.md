@@ -780,7 +780,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-#### ~~ucfirst(str)~~
+##### ~~ucfirst(str)~~
 
 _DEPRECATED_ 没什么用
 
@@ -1572,7 +1572,62 @@ superclass: B { proto0="B",  proto2="B",  proto3="B"}
 static0: undefined
 static1: X
 ```
+##### augment(cls, arg1\[, arg2\, arg3, ...\[, overwrite,\[, whitelist\]\]\]\]\])
 
+对类的prototype进行扩展，最末两位参数可以是`overwrite`和`whitelist`，但必须当它们的类型分别为`Boolean`和`Array`时。
+
+**Parameters**
+
+* cls:Function 待扩展的类
+* arg1:Object 该对象中的属性扩展进`cls.prototype`
+* arg2, arg3, ..., argN 不定长参数，依次对`cls.prototype`，所以越后面的优先级越高，将覆盖之前的属性
+* overwrite:Boolean 可选，默认为true
+* whitelist:Array 可选，允许被扩展进`cls`的属性
+
+**Return**
+
+`Function` `cls`本身
+
+**Demo**
+
+```javascript
+modulex.use("util", function(util) {
+	var arg1 = { proto0: 1 },
+		arg2 = { proto1: 2 },
+		arg3 = { proto1: 3 };
+	function output(Clz) {
+		util.augment.apply(util, arguments);
+		var o = new Clz();
+		console.info("proto0: " + o.proto0);
+		console.info("proto1: " + o.proto1);
+	}
+	console.log("简单用法");
+	output(function() {}, arg1, arg2, arg3);
+	console.log("不覆盖");
+	output(function() {}, arg1, arg2, arg3, false);
+	console.log("白名单 [\"proto1\"]");
+	output(function() {}, arg1, arg2, arg3, ["proto1"]);
+	console.log("不覆盖 + 白名单 [\"proto1\"]");
+	output(function() {}, arg1, arg2, arg3, false, ["proto1"]);
+});
+```
+
+输出：
+
+```
+简单用法
+proto0: 1
+proto1: 3
+不覆盖
+proto0: 1
+proto1: 2
+白名单 ["proto1"]
+proto0: undefined
+proto1: 3
+不覆盖 + 白名单 ["proto1"]
+proto0: undefined
+proto1: 2
+```
 
 ##### 通用工具
 
@@ -1814,10 +1869,9 @@ modulex.use("util", function(util) {
 
 
 
-##### augment(r, varArgs)
 
 
 
-#
+
 
 
