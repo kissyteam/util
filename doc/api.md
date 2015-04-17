@@ -1,4 +1,3 @@
-### 概览
 `util`是一个常用的工具集。
 
 #### _debug: "@DEBUG@"
@@ -8,12 +7,6 @@
 #### version: "1.1.6"
 
 版本号
-
-------
-
-通用
-
-------
 
 ### noop()
 
@@ -80,12 +73,6 @@ modulex.use("util", function(util) {
 	}, 500);
 });
 ```
-
--------
-
-类型判断工具
-
--------
 
 ### type(o)
 
@@ -216,7 +203,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-### is类型Boolean(o)
+### isBoolean(o)
 
 判断是否为布尔值，只有`true/false`时为`true`。
 
@@ -436,12 +423,6 @@ modulex.use("util", function(util) {
 	output(document);// false
 });
 ```
-
--------
-
-字符串工具
-
--------
 
 ### guid(\[prefix\])
 
@@ -814,12 +795,6 @@ modulex.use("util", function(util) {
 });
 ```
 
--------
-
-对象工具
-
--------
-
 ### each(object, fn\[, thisArg\])
 
 用来遍历对象的属性键值（v-k，对数组或类数组来说，k是index）对，并对每个属性执行一次`fn(v, k)`，`context`用以指定`fn`中的`this`。当应用于数组是，“类似”于ECMA-5的[`Array.prototype.forEach(fn, thisArg)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)，不同的是，这里可以以`return false`的方式提前结束。
@@ -1067,12 +1042,6 @@ modulex.use("util", function(util) {
 	util.namespace("d.e", c);// window.a.b.c.d.e = {}
 });
 ```
-
--------
-
-数组工具
-
--------
 
 ### makeArray(o)
 
@@ -1374,12 +1343,6 @@ modulex.use("util", function(util) {
 	});
 });
 ```
-
--------
-
-函数工具
-
--------
 
 ### bind(fn, thisArg\[, arg1\[, arg2\[, ...\]\]\])
 
@@ -1696,8 +1659,6 @@ proto0: undefined
 proto1: 2
 ```
 
-### 通用工具
-
 ### now()
 
 返回当前客户端的时间毫秒数（当前时间与1970-01-01 00:00:00 UTC的毫秒差），相当于`new Date().getTime()`或`+new Date()`。ECMA-5中[`Date.now()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now)的替代品。
@@ -1859,12 +1820,6 @@ modulex.use("util", function(util) {
 	});
 });
 ```
-
--------
-
-数据解析工具
-
--------
 
 ### parseJson(data)
 
