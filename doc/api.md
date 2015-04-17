@@ -808,7 +808,7 @@ modulex.use("util", function(util) {
 
 ### each(o, fn\[, thisArg\])
 
-用来遍历对象的属性键值（v-k，对数组或类数组来说，k是index）对，并对每个属性执行一次`fn(v, k)`，`thisArg`用以指定`fn`中的`this`。当应用于数组是，“类似”于ECMA-5的[`Array.prototype.forEach(fn, thisArg)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)，不同的是，这里可以以`return false`的方式提前结束。
+用来遍历对象的属性键值（v-k，对数组或类数组来说，k是index）对，并对每个属性执行一次`fn(v, k)`，`thisArg`用以指定`fn`中的`this`。当应用于数组时，“类似”于ECMA-5的[`Array.prototype.forEach(fn, thisArg)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)，不同的是，这里可以以`return false`的方式提前结束。
 
 也是JS类库和框架的标配，以下是KISSY、jQuery、angular和ECMA5之间的区别：
 
@@ -1479,7 +1479,7 @@ modulex.use("util", function(util) {
 **Parameters**
 
 * `fn:Function` 需要被封装的方法
-* `ms:Number` 可选，延时多少毫秒执行`fn`，不传或传`0`、`null`等假值是，默认成150ms
+* `ms:Number` 可选，延时多少毫秒执行`fn`，不传或传`0`、`null`等假值时，默认成150ms
 * `thisArg:Object` 可选，`fn`运行时的`this`指向
 
 **Return**
