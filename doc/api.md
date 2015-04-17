@@ -1,8 +1,6 @@
 ### 概览
 `util`是一个常用的工具集。
 
-### 属性
-
 #### _debug: "@DEBUG@"
 
 没用的东西
@@ -11,9 +9,13 @@
 
 版本号
 
-### 通用
+------
 
-##### noop()
+通用
+
+------
+
+### noop()
 
 一个空方法。可以用作默认的callback填充方法，这样就不需要到处创建空的默认方法了。jQuery、angular等都配备了这个实际上没用的方法。
 
@@ -33,9 +35,7 @@ modulex.add(function(require) {
 });
 ```
 
-#### Web工具
-
-##### ready(fn)
+### ready(fn)
 
 DOMReady之前注册DOMReady的监听事件，若DOM已然ready，则回调方法将被立即执行。所有的JS库和框架必备的神器。
 
@@ -53,7 +53,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### available(id, fn)
+### available(id, fn)
 
 _DEPRECATED_ 这种机制不可取，完全可以用事件通知的机制来代替。
 
@@ -81,9 +81,13 @@ modulex.use("util", function(util) {
 });
 ```
 
-#### 类型判断工具
+-------
 
-##### type(o)
+类型判断工具
+
+-------
+
+### type(o)
 
 通用类型判断，输出`o`的类型，为全小写的字符串，适合于`switch`语句的选择因子。类似于`typeof`，但比后者更为精确。
 
@@ -127,7 +131,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### isArray(o)
+### isArray(o)
 
 判断类型否为数组。ECMA-5的[`Array.isArray()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray)的替身。
 
@@ -148,7 +152,7 @@ modulex.use("util", function(util) {
 	output(arguments);// false
 });
 ```
-##### isUndefined(o)
+### isUndefined(o)
 
 判断是否为`undefined`。
 
@@ -169,7 +173,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### isNull(o)
+### isNull(o)
 
 判断是否为`null`。
 
@@ -189,7 +193,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### isNumber(o)
+### isNumber(o)
 
 判断类型是否为数字（注意`NaN`也为`true`，这跟`typeof NaN`为`"number"`一样）。
 
@@ -212,7 +216,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### is类型Boolean(o)
+### is类型Boolean(o)
 
 判断是否为布尔值，只有`true/false`时为`true`。
 
@@ -235,7 +239,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### isDate(o)
+### isDate(o)
 
 判断类型是否为`Date`类型。
 
@@ -255,7 +259,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### isFunction(o)
+### isFunction(o)
 
 判断类型是否为`Function`。
 
@@ -277,7 +281,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### isObject(o)
+### isObject(o)
 
 _BUGGY_ `isObject`对`window`、`document`也判定为`true`。
 
@@ -304,7 +308,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### isEmptyObject(o)
+### isEmptyObject(o)
 
 _BUGGY_ 这个方法有问题 {}, true, false, 0, 1234, "", undefined... 很多都返回true
 
@@ -334,7 +338,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### isPlainObject(obj)
+### isPlainObject(obj)
 
 判断是否为简单对象，即它的`__proto__.constructor`是`Object`而非其他类的对象。
 
@@ -365,7 +369,7 @@ modulex.use("util, json", function(util, JSON) {
 });
 ```
 
-##### isRegExp(o)
+### isRegExp(o)
 
 判断是否为正则表达式。
 
@@ -386,7 +390,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### isString(o)
+### isString(o)
 
 判断是否为字符串字面量（`"string"`），或字符串对象（`new String("string")`）。
 
@@ -407,7 +411,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### isWindow(o)
+### isWindow(o)
 
 判断是否为`window`对象。
 
@@ -433,9 +437,13 @@ modulex.use("util", function(util) {
 });
 ```
 
-#### 字符串工具
+-------
 
-##### guid(\[prefix\])
+字符串工具
+
+-------
+
+### guid(\[prefix\])
 
 每次调用创建一个唯一的字符串（其实就是递增一个数值）。
 
@@ -456,7 +464,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### escapeHTML(str)|escapeHtml(str)
+### escapeHTML(str)|escapeHtml(str)
 
 _TODO_ make escapeHTML deprecated
 
@@ -477,7 +485,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### unEscapeHTML(str)|unEscapeHtml(str)
+### unEscapeHTML(str)|unEscapeHtml(str)
 
 _TODE_ make unEscapeHTML deprecated, and maybe "unescape"?
 
@@ -498,7 +506,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### escapeRegExp(str)
+### escapeRegExp(str)
 
 将字符串中的正则敏感的元字符`{ } [ ] ( ) . \ / + - ? * |`以及空白字符进行转义。适用于`new RegExp(input)`，`input`为用户输入的不可控字符串时，比如在当然文档中搜索用户指定的字符串。
 
@@ -517,7 +525,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### startsWith(str, prefix)
+### startsWith(str, prefix)
 
 判断字符串`str`是否以`prefix`打头。ECMA-6原生[`String.prototype.startsWith(prefix)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith)的替代，但没有可选的`position`参数。
 
@@ -534,7 +542,7 @@ modulex.use("util", function(util) {
 	console.info(util.startsWith("chrome", "fire"));// false
 });
 ```
-##### endsWith(str, suffix)
+### endsWith(str, suffix)
 
 判断字符串`str`是否以`suffix`打头。ECMA-6原生[`String.prototype.endsWith(suffix)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith)的替代，但没有可选的`position`参数。
 
@@ -552,7 +560,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### trim(str)
+### trim(str)
 
 去除字符串头尾空格。ECMA-5原生[`String.prototype.trim()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim)的替代。
 
@@ -571,7 +579,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### substitute(str, o[, regexp])
+### substitute(str, o[, regexp])
 
 使用对象`o`中对应的属性值替换`str`中的`{key}`子串，这个方法最早出现在[prototype.js](http://prototypejs.org/)中。可选参数`regexp `用于自定义用于替换的子串的模式。
 
@@ -598,7 +606,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### urlEncode(str)
+### urlEncode(str)
 
 实际上就是调用了`encodeURIComponent`。
 
@@ -614,7 +622,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### urlDecode(str)
+### urlDecode(str)
 
 调用`decodeURIComponent`，但会先把字符串中的`+`号转成空格。_这种进出不能完全反过来的做法，其实实不可取的。_
 
@@ -631,7 +639,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### fromUnicode(str)
+### fromUnicode(str)
 
 把字符串中含有的`\u0123`这样的字符转换成人可读的字符。
 
@@ -649,7 +657,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### param(o\[, sep\[, eq\[, serializeArray\]\]\])
+### param(o\[, sep\[, eq\[, serializeArray\]\]\])
 
 序列化对象或数组，生成HTML可用的参数`a=a&b=b`的形式，也可以通过参数定制的方式生成所需的格式。
 
@@ -717,7 +725,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### unparam(str, sep, eq)
+### unparam(str, sep, eq)
 
 `util.param`的“反”方法，用于将字符串转成对象，但无法得知原数据中的格式，故所有的基本值都是字符串类型。
 
@@ -758,7 +766,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### camelCase(str)
+### camelCase(str)
 
 _NEW since Version 5_
 _DEPRECATED_ 没什么用
@@ -780,7 +788,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### ~~ucfirst(str)~~
+### ~~ucfirst(str)~~
 
 _DEPRECATED_ 没什么用
 
@@ -806,13 +814,66 @@ modulex.use("util", function(util) {
 });
 ```
 
-#### 数组|对象混合工具
+-------
 
-广义上讲，数组或类数组是一种以数字作为属性名的特殊对象。所以很多方法，既可以用于数组，也可以用于对象。
+对象工具
 
-##### each(object, fn\[, context\])
+-------
 
-用来遍历对象的属性键值（v-k，对数组或类数组来说，k是index）对，并对每个属性执行一次`fn(v, k)`，`context`用以指定`fn`中的`this`。当应用于数组是，“类似”于ECMA-5的[`Array.prototype.forEach(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)，不同的是，这里可以以`return false`的方式提前结束。
+### each(object, fn\[, thisArg\])
+
+用来遍历对象的属性键值（v-k，对数组或类数组来说，k是index）对，并对每个属性执行一次`fn(v, k)`，`context`用以指定`fn`中的`this`。当应用于数组是，“类似”于ECMA-5的[`Array.prototype.forEach(fn, thisArg)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)，不同的是，这里可以以`return false`的方式提前结束。
+
+也是JS类库和框架的标配，以下是KISSY、jQuery、angular和ECMA5之间的区别：
+
+- | KISSY | jQuery | angular | ECMA5
+-- | -- | -- | --
+Function | `util.each(o, fn, thisArg)` | `jQuery.each(o, fn, thisArg)` | `angular.forEach(o, fn, thisArg)` | `[...].forEach(fn, thisArg)`
+回调`fn`参数列表 | `v, k` | `k, v` | `v, k` | `v, k`
+`fn`中`return false`是否提前结束循环 | 可以 | 可以 | 不 | 不
+
+可以使用以下代码，验证以上结论（需要在“好”的浏览器中，而且页面上需要有KISSY、jQuery和angular的基础代码）：
+
+```javascript
+modulex.use("util", function(util) {
+	var arr = [3, 6, "9", 12],
+		fnVK = function(v, k) {
+			console.info("v,k = " + v + "," + k);
+			return v % 2 === 0;
+		},
+		fnKV = function(k, v) {
+			console.info("k,v = " + k + "," + v);
+			return v % 2 === 0;
+		};
+	console.log("KISSY");
+	util.each(arr, fnVK);
+	console.log("jQuery");
+	jQuery.each(arr, fnKV);
+	console.log("angular");
+	angular.forEach(arr, fnVK);
+	console.log("ECMA5");
+	arr.forEach(fnVK);
+});
+```
+
+输出如下：
+
+```
+KISSY
+v,k = 3,0
+jQuery
+k,v = 0,3
+angular
+v,k = 3,0
+v,k = 6,1
+v,k = 9,2
+v,k = 12,3
+ECMA5
+v,k = 3,0
+v,k = 6,1
+v,k = 9,2
+v,k = 12,3
+```
 
 **Parameters**
 
@@ -848,9 +909,7 @@ v=Y, k=y
 v=Z, k=z
 ```
 
-#### 对象工具
-
-##### keys(o)
+### keys(o)
 
 获取对象`o`中的所有属性值，并返回为一个数组。ECMA-5的`Object.keys(o)`的替换，实际上KISSY在实现的时候，如果判断存在`Object.keys(o)`，则直接使用这个方法。
 
@@ -866,7 +925,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### merge(\[arg1\[, arg2\[, arg3 ...\]\]\])
+### merge(\[arg1\[, arg2\[, arg3 ...\]\]\])
 
 创建一个新的对象，并将传入的参数逐个合并到该对象，后面的参数中含有的属性将覆盖之前的属性。如果只传一个参数，相当于对其做一次浅拷贝。
 
@@ -890,7 +949,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### mix(dest, src\[, overwrite\[, whitelist\[, deep\]\]\])
+### mix(dest, src\[, overwrite\[, whitelist\[, deep\]\]\])
 
 将对象中`src`的属性拷贝到`dest`中。此方法有三个“重载”：最简单的`mix(dest, src)`，平铺式的额外参数：`mix(dest, src, overwrite, whitelist, deep)`，结构化额外参数`mix(dest, src, { overwrite: true, whitelist: null, deep: false, structured: true })`。
 
@@ -948,7 +1007,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### stamp(o, readOnly, marker)
+### stamp(o, readOnly, marker)
 
 _DEPRECATED_ 这个方法作为KISSY的内部方法可以，但暴露出来...
 
@@ -985,7 +1044,7 @@ modulex.use("util", function(util) {
 {} undefined
 ```
 
-##### namespace(name, holder)
+### namespace(name, holder)
 
 _DEPRECATED_ 这个方法其实已经很古老了，调用者之间容易产生各种各样的冲突，在模块化模式已经十分成熟的情况下，这个方法已经不再需要。
 
@@ -1009,9 +1068,13 @@ modulex.use("util", function(util) {
 });
 ```
 
-#### 数组工具
+-------
 
-##### makeArray(o)
+数组工具
+
+-------
+
+### makeArray(o)
 
 _DEPRECATED_
 
@@ -1045,7 +1108,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### indexOf(item, arr\[, fromIndex\])
+### indexOf(item, arr\[, fromIndex\])
 
 查找`item`在`arr`中第一次出现的位置，`fromIndex`用以指定从哪个位置开始找起，默认为0。
 
@@ -1078,7 +1141,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### lastIndexOf(item, arr\[, fromIndex\])
+### lastIndexOf(item, arr\[, fromIndex\])
 
 与`indexOf`类似，查找`item`在`arr`中最后一次出现的位置，`fromIndex`默认为`arr.length - 1`。同样注意，不要用在`String`上。
 
@@ -1109,7 +1172,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### inArray(item, arr)
+### inArray(item, arr)
 
 判断`item`是否在`arr`中。跟`jQuery`的`inArray`返回的结果是数字（jQuery的`inArray`其实是`indexOf`）不同，这里返回布尔值`true/false`。
 
@@ -1138,7 +1201,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### every(arr, fn\[, context\])
+### every(arr, fn\[, context\])
 
 遍历数组，直到对某个元素，`fn(v, k)`返回假值（`false/null/undefined/NaN/""/0`），则结束遍历，结果为`false`，否则结果为`true`。ECMA-5中[`Array.prototype.every(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)的替代品。
 
@@ -1171,7 +1234,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### some(arr, fn\[, context\])
+### some(arr, fn\[, context\])
 
 遍历数组，若某个元素`fn(v, k)`返回真值（不一定要`true`），则结束遍历，表达式返回`true`；若所有元素都不返回真值，返回`false`。ECMA-5中[`Array.prototype.some(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)的替代品。
 
@@ -1201,7 +1264,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### filter(arr, fn\[, context\])
+### filter(arr, fn\[, context\])
 
 遍历数组，将`fn(v, k)`返回`true`的`v`组成一个新的数组，新数组包含的元素为源数组的一个子集，用于将`arr`中符合条件的值过滤出来。ECMA-5中[`Array.prototype.filter(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)的替代品。
 
@@ -1231,7 +1294,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### map(arr, fn\[, context\])
+### map(arr, fn\[, context\])
 
 遍历数组，把`fn(v, k)`的返回值组成一个等长的新数组。ECMA-5中[`Array.prototype.map(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)的替代品。
 
@@ -1258,7 +1321,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### unique(arr\[, override\])
+### unique(arr\[, override\])
 
 遍历数组，剔除里面相同的元素，返回一个只有不重叠元素的新数组，新数组包含的元素为源数组的一个子集，这有些类似于`filter`。
 
@@ -1280,7 +1343,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### reduce(arr, fn\[, initialValue\])
+### reduce(arr, fn\[, initialValue\])
 
 TODO：代码中其他地方都叫fn，这里叫callback
 
@@ -1312,9 +1375,13 @@ modulex.use("util", function(util) {
 });
 ```
 
-#### 函数工具
+-------
 
-##### bind(fn, thisArg\[, arg1\[, arg2\[, ...\]\]\])
+函数工具
+
+-------
+
+### bind(fn, thisArg\[, arg1\[, arg2\[, ...\]\]\])
 
 返回一个新的方法，使得它的上下文`this`为传入的`thisArg`，并可以配置默认的参数列表，如果新方法调用时又传入了新的参数，新参数将被拼接在配置的参数列表之后。ECMA-5[`Array.prototype.bind(thisArg[, arg1[, arg2[, ...]]])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)的替代品。
 
@@ -1337,7 +1404,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### rbind(fn, thisArg\[, arg1\[, arg2\[, ...\]\]\])
+### rbind(fn, thisArg\[, arg1\[, arg2\[, ...\]\]\])
 
 跟`util.bind()`基本一样，唯一的区别是参数列表的处理，配置的配置将被拼接在传入参数的后面。没有对应的EMCA方法，是KISSY自己YY出来的一个方法，但可能会很有用。
 
@@ -1358,7 +1425,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### later(fn, when\[, periodic\[, thisArg\[, data\]\]\])
+### later(fn, when\[, periodic\[, thisArg\[, data\]\]\])
 
 延时或周期执行`fn`，返回一个对象，通过返回的对象可以取消代码的运行。
 
@@ -1413,7 +1480,7 @@ modulex.use("util", function(util) {
 1200ms周期被取消
 ```
 
-##### buffer(fn\[, ms\[, thisArg\]\])
+### buffer(fn\[, ms\[, thisArg\]\])
 
 将源方法`fn`进行封装，返回一个新的方法，调用这个新方法，将延时执行源方法；所有传递给新方法的参数将按原样传递给`fn`；若在延时期间重新调用则，原延时将被取消。
 
@@ -1461,7 +1528,7 @@ modulex.use("util", function(util) {
 959 Object { _=500} [1, 2, 3]
 ```
 
-##### throttle(fn\[, ms\[, thisArg\]\])
+### throttle(fn\[, ms\[, thisArg\]\])
 
 返回一个新的方法`fn0`，对方法`fn`的调用进行“限流”，在限流后的`ms`毫秒内，无论多少次调用`fn0`，多不会最终调到`fn`，只有过了给定的时间，调用`fn0`才会调到`fn`。每次调用成功后的`ms`时间内，`fn`又将进入“限流”期。
 
@@ -1492,7 +1559,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### extend(classA, classB\[, protoX\[, staticX\]\])
+### extend(classA, classB\[, protoX\[, staticX\]\])
 
 提供原型链类继承的机制，`classA`继承`classB`。`classA.prototype`定义了的属性将不受`classB.prototype`的影响。`classB`的构造器不会在`new classA`的时候被调用。
 
@@ -1572,7 +1639,7 @@ superclass: B { proto0="B",  proto2="B",  proto3="B"}
 static0: undefined
 static1: X
 ```
-##### augment(cls, arg1\[, arg2\, arg3, ...\[, overwrite,\[, whitelist\]\]\]\]\])
+### augment(cls, arg1\[, arg2\, arg3, ...\[, overwrite,\[, whitelist\]\]\]\]\])
 
 对类的prototype进行扩展，最末两位参数可以是`overwrite`和`whitelist`，但必须当它们的类型分别为`Boolean`和`Array`时。
 
@@ -1629,9 +1696,9 @@ proto0: undefined
 proto1: 2
 ```
 
-##### 通用工具
+### 通用工具
 
-##### now()
+### now()
 
 返回当前客户端的时间毫秒数（当前时间与1970-01-01 00:00:00 UTC的毫秒差），相当于`new Date().getTime()`或`+new Date()`。ECMA-5中[`Date.now()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now)的替代品。
 
@@ -1654,7 +1721,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### equals(a, b)
+### equals(a, b)
 
 _BUGGY_ 所有的正则式，不论是字面量还是`new`出来的都等价。
 
@@ -1751,7 +1818,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### clone(input[, filter\])
+### clone(input[, filter\])
 
 _BUGGY_ `filter`在没有返回值的情况下，对数组和非数组处理不一致，数组因为内部调用了`util.filter`所以会返回空数组。
 
@@ -1793,9 +1860,13 @@ modulex.use("util", function(util) {
 });
 ```
 
-#### 数据解析工具
+-------
 
-##### parseJson(data)
+数据解析工具
+
+-------
+
+### parseJson(data)
 
 将字符串`data`转成JavaScript值。一定程度上它是`JSON.parse`的替代品，只是没有后者的`reviver`回调。然而`JSON.parse(1)`可以工作，而`util.parseJson(1)`抛错。`data`为`null`的时候返回`null`。
 
@@ -1821,7 +1892,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### parseXml(data)|parseXML(data)
+### parseXml(data)|parseXML(data)
 
 _TODO_ deprecate parseXML
 
@@ -1848,7 +1919,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### globalEval(data)
+### globalEval(data)
 
 提供一个“安全”的方式来调用“evil”的`eval`，`eval`的环境为当前的`global`对象，对于浏览器来说，就是`window`。跟`eval`不同的是，`globalEval`没有返回值。
 
