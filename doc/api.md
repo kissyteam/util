@@ -922,11 +922,59 @@ modulex.use("util", function(util) {
 });
 ```
 
+##### stamp(o, readOnly, marker)
+
+_DEPRECATED_ 这个方法作为KISSY的内部方法可以，但暴露出来...
+
+获取或给对象打一个标记，在`readOnly`为`true`的情况下进行只读。
+
+**Parameters**
+
+* o:Object
+* readOnly:Boolean 可选，默认`false`
+* marker:String 可选，默认`"__~ks_stamped"`
+
+**Return**
+
+`String` 得到或打上的标记。
+
+**demo**
+
+```javascript
+modulex.use("util", function(util) {
+	function output() {
+		console.info(arguments[0], util.stamp.apply(util, arguments));
+	}
+	var o1 = {}, o2 = {};
+	output(o1);
+	output(o1, true);
+	output(o2, true);
+});
+```
+输出如下：
+
+```
+{ __~ks_stamped="__~ks_stamped0"} __~ks_stamped0
+{ __~ks_stamped="__~ks_stamped0"} __~ks_stamped0
+{} undefined
+```
+
 ##### namespace(name, holder)
 
 _DEPRECATED_ 这个方法其实已经很古老了，调用者之间容易产生各种各样的冲突，在模块化模式已经十分成熟的情况下，这个方法已经不再需要。
 
 根据给定的`name`（以`.`分隔的属性路径）在`holder`（默认global对象）上依次查找对象，若路径上任何对象不存在，则创建之。最终返回创建或找到的对象。
+
+**Parameters**
+
+* name:String 以`.`分隔的对象路径
+* holder:Object 可选，默认为global对象，浏览器环境为`window`
+
+**Return**
+
+最终得到或创建的对象。
+
+**demo**
 
 ```javascript
 modulex.use("util", function(util) {
@@ -951,7 +999,7 @@ _DEPRECATED_
 
 **Return**
 
-rray
+Array
 
 **Demo**
 
@@ -1742,7 +1790,7 @@ modulex.use("util", function(util) {
 
 ##### augment(r, varArgs)
 
-##### stamp(o, readOnly, marker)
+
 
 ##### ucfirst(s)
 
