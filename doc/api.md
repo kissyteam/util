@@ -1631,7 +1631,7 @@ superclass: B { proto0="B",  proto2="B",  proto3="B"}
 static0: undefined
 static1: X
 ```
-### augment(cls, arg1\[, arg2\, arg3, ...\[, overwrite,\[, whitelist\]\]\]\]\])
+### augment(cls, arg1\[, arg2\[, arg3, ...\[, overwrite,\[, whitelist\]\]\]\]\])
 
 对类的prototype进行扩展，最末两位参数可以是`overwrite`和`whitelist`，但必须当它们的类型分别为`Boolean`和`Array`时。
 
