@@ -34,7 +34,7 @@ DOMReady之前注册DOMReady的监听事件，若DOM已然ready，则回调方�
 
 **Parameters**
 
-* fn:Function DOMReady的回调函数。
+* `fn:Function` DOMReady的回调函数。
 
 **Demo**
 
@@ -46,7 +46,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-### available(id, fn)
+### ~~available(id, fn)~~
 
 _DEPRECATED_ 这种机制不可取，完全可以用事件通知的机制来代替。
 
@@ -54,8 +54,8 @@ _DEPRECATED_ 这种机制不可取，完全可以用事件通知的机制来代�
 
 **Parameters**
 
-* id:String HTML元素的id
-* fn:Function 回调
+* `id:String` HTML元素的id
+* `fn:Function` 回调
 
 **Demo**
 
@@ -80,7 +80,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -124,7 +124,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -145,7 +145,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -166,7 +166,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -186,7 +186,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -209,7 +209,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -276,7 +276,7 @@ _BUGGY_ `isObject`对`window`、`document`也判定为`true`。
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -303,7 +303,7 @@ _BUGGY_ 这个方法有问题 {}, true, false, 0, 1234, "", undefined... 很多�
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -331,7 +331,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -362,7 +362,7 @@ modulex.use("util, json", function(util, JSON) {
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -383,7 +383,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -404,7 +404,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Demo**
 
@@ -432,7 +432,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* prefix:String 可选前缀
+* `prefix:String` 可选前缀
 
 ```javascript
 modulex.use("util", function(util) {
@@ -445,7 +445,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-### escapeHTML(str)|escapeHtml(str)
+### escapeHtml(str)|escapeHTML(str)
 
 _TODO_ make escapeHTML deprecated
 
@@ -453,7 +453,7 @@ _TODO_ make escapeHTML deprecated
 
 **Parameters**
 
-* str:String 可能含有HTML敏感的字符。
+* `str:String` 可能含有HTML敏感的字符。
 
 **Demo**
 
@@ -466,15 +466,15 @@ modulex.use("util", function(util) {
 });
 ```
 
-### unEscapeHTML(str)|unEscapeHtml(str)
+### unEscapeHtml(str)|unEscapeHTML(str)
 
 _TODE_ make unEscapeHTML deprecated, and maybe "unescape"?
 
-顾名思义，与`escapeHTML`反向的动作。
+顾名思义，与`escapeHtml`反向的动作。
 
 **Parameters**
 
-* str:String HTML片段。
+* `str:String` HTML片段。
 
 **Demo**
 
@@ -493,7 +493,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* str:String 用户输入的字符串，可能含有正则的元字符和空白字符。
+* `str:String` 用户输入的字符串，可能含有正则的元字符和空白字符。
 
 **Demo**
 
@@ -512,8 +512,8 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* str:String 待测试的字符串
-* prefix:String 是否以此打头
+* `str:String` 待测试的字符串
+* `prefix:String` 是否以此打头
 
 **Demo**
 
@@ -529,8 +529,12 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* str:String 待测试的字符串
-* suffix:String 是否以此结尾
+* `str:String` 待测试的字符串
+* `suffix:String` 是否以此结尾
+
+**Return**
+
+`Boolean`
 
 **Demo**
 
@@ -547,7 +551,11 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* str:String
+* `str:String`
+
+**Return**
+
+* `String`
 
 **Demo**
 
@@ -560,15 +568,19 @@ modulex.use("util", function(util) {
 });
 ```
 
-### substitute(str, o[, regexp])
+### substitute(str, o\[, regexp\])
 
-使用对象`o`中对应的属性值替换`str`中的`{key}`子串，这个方法最早出现在[prototype.js](http://prototypejs.org/)中。可选参数`regexp `用于自定义用于替换的子串的模式。
+使用对象`o`中对应的属性值替换`str`中的`{key}`子串，`o`中找不到的属性将替换为空串，这个方法最早出现在[prototype.js](http://prototypejs.org/)中。可选参数`regexp `用于自定义用于替换的子串的模式。
 
 **Parameters**
 
-* str:String 包含替换点的字符串
-* o:Object key-value对象
-* regexp:RegExp 可选的正则表达式 默认为`/{\w+}/`
+* `str:String` 包含替换点的字符串
+* `o:Object` key-value对象
+* `regexp:RegExp` 可选，默认为`/{\w+}/`
+
+**Return**
+
+`String`
 
 **Demo**
 
@@ -593,7 +605,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* str:String
+* `str:String`
 
 **Demo**
 
@@ -609,7 +621,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* str:String
+* `str:String`
 
 **Demo**
 
@@ -628,7 +640,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* str:String 含有`\u####`的字符串。
+* `str:String` 含有`\u####`的字符串。
 
 **Demo**
 
@@ -644,14 +656,14 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* o:* 待序列化的数据
-* sep:String 可选，参数对与参数之对间的分隔符，默认`&`
-* eq:String 可选，参数对中名字与值的连接符，默认`=`
-* serializeArray:Boolean 可选，默认为`true`，将数组序列化成`arr%5B%5D=1&arr%5B%5D=2`的形式，若为`false`，则序列化成`arr=1&arr=2`
+* `o:*` 待序列化的数据
+* `sep:String` 可选，参数对与参数之对间的分隔符，默认`&`
+* `eq:String` 可选，参数对中名字与值的连接符，默认`=`
+* `serializeArray:Boolean` 可选，默认为`true`，将数组序列化成`arr%5B%5D=1&arr%5B%5D=2`的形式，若为`false`，则序列化成`arr=1&arr=2`
 
 **Return**
 
-String 序列化得到的字符串
+`String` 序列化得到的字符串
 
 **Demo**
 
@@ -712,13 +724,13 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* o:* 待序列化的数据
-* sep:String 可选，参数对与参数之对间的分隔符，默认`&`
-* eq:String 可选，参数对中名字与值的连接符，默认`=`
+* `o:*` 待序列化的数据
+* `sep:String` 可选，参数对与参数之对间的分隔符，默认`&`
+* `eq:String` 可选，参数对中名字与值的连接符，默认`=`
 
 **Return**
 
-String 序列化得到的字符串
+`String` 序列化得到的字符串
 
 **Demo**
 
@@ -747,9 +759,8 @@ modulex.use("util", function(util) {
 });
 ```
 
-### camelCase(str)
+### ~~camelCase(str)~~
 
-_NEW since Version 5_
 _DEPRECATED_ 没什么用
 
 将字符串由蛇型（snake-case）转成骆驼型（camelCase）。
@@ -758,7 +769,7 @@ _DEPRECATED_ 没什么用
 
 **Parameters**
 
-* str:String
+* `str:String`
 
 ```javascript
 modulex.use("util", function(util) {
@@ -777,7 +788,7 @@ _DEPRECATED_ 没什么用
 
 **Parameters**
 
-* str:String
+* `str:String`
 
 **Return**
 
@@ -795,9 +806,9 @@ modulex.use("util", function(util) {
 });
 ```
 
-### each(object, fn\[, thisArg\])
+### each(o, fn\[, thisArg\])
 
-用来遍历对象的属性键值（v-k，对数组或类数组来说，k是index）对，并对每个属性执行一次`fn(v, k)`，`context`用以指定`fn`中的`this`。当应用于数组是，“类似”于ECMA-5的[`Array.prototype.forEach(fn, thisArg)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)，不同的是，这里可以以`return false`的方式提前结束。
+用来遍历对象的属性键值（v-k，对数组或类数组来说，k是index）对，并对每个属性执行一次`fn(v, k)`，`thisArg`用以指定`fn`中的`this`。当应用于数组是，“类似”于ECMA-5的[`Array.prototype.forEach(fn, thisArg)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)，不同的是，这里可以以`return false`的方式提前结束。
 
 也是JS类库和框架的标配，以下是KISSY、jQuery、angular和ECMA5之间的区别：
 
@@ -852,9 +863,9 @@ v,k = 12,3
 
 **Parameters**
 
-* object:Object 被遍历的对象或数组
-* fn:Function 每次遍历到一个元素，执行回调，并将该元素及其索引传入`fn`
-* context:Object 可选，作为`fn`中的`this`
+* `o:Object` 被遍历的对象或数组
+* `fn:Function` 每次遍历到一个元素，执行回调，并将该元素及其索引传入`fn`
+* `thisObject:Object` 可选，作为`fn`中的`this`
 
 **Demo**
 
@@ -890,7 +901,11 @@ v=Z, k=z
 
 **Parameters**
 
-* o:Object
+* `o:Object`
+
+**Return**
+
+`String`
 
 **Demo**
 
@@ -902,7 +917,7 @@ modulex.use("util", function(util) {
 
 ### merge(\[arg1\[, arg2\[, arg3 ...\]\]\])
 
-创建一个新的对象，并将传入的参数逐个合并到该对象，后面的参数中含有的属性将覆盖之前的属性。如果只传一个参数，相当于对其做一次浅拷贝。
+创建一个新的对象，并将传入的参数逐个合并到该对象，后面的参数中含有的属性将覆盖之前的属性。如果只传一个参数，相当于对其做一次浅拷贝。传入的参数不会有任何变化。
 
 **Parameters**
 
@@ -910,7 +925,7 @@ modulex.use("util", function(util) {
 
 **Return**
 
-Object 混合了所有参数中的属性的一个对象
+`Object` 混合了所有参数中的属性的一个新对象
 
 **Demo**
 
@@ -932,11 +947,11 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* dest:Object 被mix的对象
-* src:Object 要被mix进dest的对象
-* overwrite:Boolean 对dest中已有的属性，是否覆盖，默认覆盖
-* whitelist:String[]|Function 字符串数组的白名单，或`return true/false`的walker。 
-* deep:Boolean 对对象是否进行深拷贝，默认只是简单覆盖
+* `dest:Object` 被mix的对象
+* `src:Object` 要被mix进`dest`的对象
+* `overwrite:Boolean` 对`dest`中已有的属性，是否覆盖，默认覆盖
+* `whitelist:String[]|Function` 字符串数组的白名单，或`return true/false`的walker。 
+* `deep:Boolean` 对对象是否进行深拷贝，默认只是简单覆盖
 
 **Demo**
 
@@ -982,7 +997,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-### stamp(o, readOnly, marker)
+### ~~stamp(o, readOnly, marker)~~
 
 _DEPRECATED_ 这个方法作为KISSY的内部方法可以，但暴露出来...
 
@@ -990,9 +1005,9 @@ _DEPRECATED_ 这个方法作为KISSY的内部方法可以，但暴露出来...
 
 **Parameters**
 
-* o:Object
-* readOnly:Boolean 可选，默认`false`
-* marker:String 可选，默认`"__~ks_stamped"`
+* `o:Object`
+* `readOnly:Boolean` 可选，默认`false`
+* `marker:String` 可选，默认`"__~ks_stamped"`
 
 **Return**
 
@@ -1019,7 +1034,7 @@ modulex.use("util", function(util) {
 {} undefined
 ```
 
-### namespace(name, holder)
+### ~~namespace(name, holder)~~
 
 _DEPRECATED_ 这个方法其实已经很古老了，调用者之间容易产生各种各样的冲突，在模块化模式已经十分成熟的情况下，这个方法已经不再需要。
 
@@ -1027,12 +1042,12 @@ _DEPRECATED_ 这个方法其实已经很古老了，调用者之间容易产生�
 
 **Parameters**
 
-* name:String 以`.`分隔的对象路径
-* holder:Object 可选，默认为global对象，浏览器环境为`window`
+* `name:String` 以`.`分隔的对象路径
+* `holder:Object` 可选，默认为global对象，浏览器环境为`window`
 
 **Return**
 
-最终得到或创建的对象。
+`Object` 最终得到或创建的对象。
 
 **demo**
 
@@ -1043,7 +1058,7 @@ modulex.use("util", function(util) {
 });
 ```
 
-### makeArray(o)
+### ~~makeArray(o)~~
 
 _DEPRECATED_
 
@@ -1053,11 +1068,11 @@ _DEPRECATED_
 
 **Parameters**
 
-* o:* 任意类型数据
+* `o:*` 任意类型数据
 
 **Return**
 
-Array
+`Array`
 
 **Demo**
 
@@ -1085,13 +1100,13 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* item:* 带查找的元素
-* arr:Array
-* fromIndex:Number 可选，从第几个位置开始往后查找
+* `item:*` 带查找的元素
+* `arr:Array`
+* `fromIndex:Number` 可选，从第几个位置开始往后查找
 
 **Return**
 
-Boolean
+`Boolean`
 
 **Demo**
 
@@ -1116,13 +1131,13 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* item:* 带查找的元素
-* arr:Array
-* fromIndex:Number 可选，从第几个位置开始往前查找
+* `item:*` 带查找的元素，如果是对象或数组，要求其引用相同，即是同一个对象
+* `arr:Array`
+* `fromIndex:Number` 可选，从第几个位置开始往前查找
 
 **Return**
 
-Boolean
+`Boolean`
 
 **Demo**
 
@@ -1147,12 +1162,12 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* item:* 带查找的元素
-* arr:Array
+* `item:*` 带查找的元素
+* `arr:Array`
 
 **Return**
 
-Boolean
+`Boolean`
 
 **Demo**
 
@@ -1170,19 +1185,19 @@ modulex.use("util", function(util) {
 });
 ```
 
-### every(arr, fn\[, context\])
+### every(arr, fn\[, thisArg\])
 
-遍历数组，直到对某个元素，`fn(v, k)`返回假值（`false/null/undefined/NaN/""/0`），则结束遍历，结果为`false`，否则结果为`true`。ECMA-5中[`Array.prototype.every(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)的替代品。
+遍历数组，直到对某个元素，`fn(v, k)`返回假值（`false/null/undefined/NaN/""/0`），则结束遍历，结果为`false`，否则结果为`true`。ECMA-5中[`Array.prototype.every(fn, thisArg)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)的替代品。
 
 **Parameters**
 
-* arr:Array
-* fn(v, k):Function 每次遍历到一个元素，执行回调，并将该元素及其索引传入`fn`，若返回假值则结束遍历，表达式为`false`
-* context:Object 可选，作为`fn`中的`this`
+* `arr:Array`
+* `fn:Function` 每次遍历到一个元素，执行回调，并将该元素及其索引传入`fn`，若返回假值则结束遍历，表达式为`false`
+* `thisArg:Object` 可选，作为`fn`中的`this`
 
 **Return**
 
-Boolean
+`Boolean`
 
 **Demo**
 
@@ -1203,19 +1218,19 @@ modulex.use("util", function(util) {
 });
 ```
 
-### some(arr, fn\[, context\])
+### some(arr, fn\[, thisArg\])
 
-遍历数组，若某个元素`fn(v, k)`返回真值（不一定要`true`），则结束遍历，表达式返回`true`；若所有元素都不返回真值，返回`false`。ECMA-5中[`Array.prototype.some(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)的替代品。
+遍历数组，若某个元素`fn(v, k)`返回真值（不一定要`true`），则结束遍历，表达式返回`true`；若所有元素都不返回真值，返回`false`。ECMA-5中[`Array.prototype.some(fn, thisArg)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)的替代品。
 
 **Parameters**
 
-* arr:Array
-* fn(v, k):Function 每次遍历到一个元素，执行回调，并将该元素及其索引传入`fn`，若返回真值则结束遍历，表达式为`true`
-* context:Object 可选，作为`fn`中的`this`
+* `arr:Array`
+* `fn:Function` 每次遍历到一个元素，执行回调，并将该元素及其索引传入`fn`，若返回真值则结束遍历，表达式为`true`
+* `thisArg:Object` 可选，作为`fn`中的`this`
 
 **Return**
 
-Boolean
+`Boolean`
 
 **Demo**
 
@@ -1233,15 +1248,15 @@ modulex.use("util", function(util) {
 });
 ```
 
-### filter(arr, fn\[, context\])
+### filter(arr, fn\[, thisArg\])
 
-遍历数组，将`fn(v, k)`返回`true`的`v`组成一个新的数组，新数组包含的元素为源数组的一个子集，用于将`arr`中符合条件的值过滤出来。ECMA-5中[`Array.prototype.filter(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)的替代品。
+遍历数组，将`fn(v, k)`返回`true`的`v`组成一个新的数组，新数组包含的元素为源数组的一个子集，用于将`arr`中符合条件的值过滤出来。ECMA-5中[`Array.prototype.filter(fn, thisArg)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)的替代品。
 
 **Parameters**
 
-* arr:Array
-* fn(v, k):Function 每次遍历到一个元素，执行回调，并将该元素及其索引传入`fn`，若返回真值，该元素将被收纳进新的数组
-* context:Object 可选，作为`fn`中的`this`
+* `arr:Array`
+* `fn:Function` 每次遍历到一个元素，执行回调，并将该元素及其索引传入`fn`，若返回真值，该元素将被收纳进新的数组
+* `thisArg:Object` 可选，作为`fn`中的`this`
 
 **Return**
 
@@ -1263,19 +1278,19 @@ modulex.use("util", function(util) {
 });
 ```
 
-### map(arr, fn\[, context\])
+### map(arr, fn\[, thisArg\])
 
-遍历数组，把`fn(v, k)`的返回值组成一个等长的新数组。ECMA-5中[`Array.prototype.map(fn, context)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)的替代品。
+遍历数组，把`fn(v, k)`的返回值组成一个等长的新数组。ECMA-5中[`Array.prototype.map(fn, thisArg)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)的替代品。
 
 **Parameters**
 
-* arr:Array
-* fn(v, k):Function 每次遍历到一个元素，执行回调，并将该元素及其索引传入`fn`，返回值在新的数组中的位置与当前位置相同
-* context:Object 可选，作为`fn`中的`this`
+* `arr:Array`
+* `fn:Function` 每次遍历到一个元素，执行回调，并将该元素及其索引传入`fn`，返回值在新的数组中的位置与当前位置相同
+* `thisArg:Object` 可选，作为`fn`中的`this`
 
 **Return**
 
-映射后的新数组，具有源数组相同的长度，成员一般不与原数组中的相同，
+`Array` 新数组，具有源数组相同的长度，成员一般不与原数组中的相同，
 
 **Demo**
 
@@ -1299,6 +1314,10 @@ modulex.use("util", function(util) {
 * `arr:Array`
 * `override:Boolean` 默认为`false`，若找到一个非唯一元素，是否把之前已经放入新数组的元素剔除，并把当前的数组接在新数组的当前末尾；举例来说，`[1, 2, 1]`默认会输出`[1, 2]`，`override`为`true`则输出`[2, 1]`
 
+**Return**
+
+`Array` 新数组，含有的元素为源数据中的一个子集，不含相同元素
+
 **Demo**
 
 ```javascript
@@ -1308,13 +1327,13 @@ modulex.use("util", function(util) {
 	}
 	output([1, 2, 3, 2, 1]);// [1, 2, 3]
 	output([1, 2, 3, 2, 1], true);// [3, 2, 1]
-	output([{a: 1}, {a: 1}]);// [{a: 1}, {a: 1}]，对于引用对象，只简单比较引用，不比较女人
+	output([{a: 1}, {a: 1}]);// [{a: 1}, {a: 1}]，对于引用对象，只简单比较引用，不比较内容
 });
 ```
 
 ### reduce(arr, fn\[, initialValue\])
 
-TODO：代码中其他地方都叫fn，这里叫callback
+TODO：代码中其他地方都叫`fn`，这里叫`callback`，但我文档里必须写`fn`
 
 遍历数组，`fn`作为累加器把数组中的每个值（从左到右）开始缩减，最终得到一个值。ECMA-5[`Array.prototype.reduce(fn, initialValue)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)的替代品。
 
@@ -1350,9 +1369,13 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* fn:Function 源方法
-* thisArg:Object 新方法调用时的`this`指向
-* argN:* 动态参数
+* `fn:Function` 源方法
+* `thisArg:Object` 新方法调用时的`this`指向
+* `argN:*` 动态不定长参数
+
+**Return**
+
+`Function` 新方法
 
 **Demo**
 
@@ -1373,7 +1396,13 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-str:String
+* `fn:Function` 源方法
+* `thisArg:Object` 新方法调用时的`this`指向
+* `argN:*` 动态不定长参数
+
+**Return**
+
+`Function` 新方法
 
 **Demo**
 
@@ -1394,17 +1423,17 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* fn:Function 被延时或周期运行的方法
-* when:Number 延时多少毫秒执行`fn`
-* periodic:Boolean 可选，是否以`when`为周期性运行
-* thisArg:Object 可选，`fn`运行时的`this`指向
-* data:* 可选，运行时传递给`fn`的参数，如果是数组，将会被`apply`到`fn`，即数组里面的数据将逐个传递给`fn`，如果本意是传递一个数组对象，请将该数组再用数组包一层。即`util.later(fn, 1000, false, null, [1, 2, 3])`，则`fn(1, 2, 3)`；若本意是`fn([1, 2, 3])`，需要这样`util.later(fn, 1000, false, null, [[1, 2, 3]])`
+* `fn:Function` 被延时或周期运行的方法
+* `when:Number` 延时毫秒数
+* `periodic:Boolean` 可选，是否以`when`为周期性运行
+* `thisArg:Object` 可选，`fn`运行时的`this`指向
+* `data:*` 可选，运行时传递给`fn`的参数，如果是数组，将会被`apply`到`fn`，即数组里面的数据将逐个传递给`fn`，如果本意是传递一个数组对象，请将该数组再用数组包一层。即`util.later(fn, 1000, false, null, [1, 2, 3])`，则`fn(1, 2, 3)`；若本意是`fn([1, 2, 3])`，需要这样`util.later(fn, 1000, false, null, [[1, 2, 3]])`
 
 _其实data的这种处理方式容易让调用者产生疑惑，可以优化成`bind`的方式_
 
 **Return**
 
-Object {id:Number, interval:Boolean, cancel:function} 相当于延时的handle，`id`和`interval`用作参考，一般有用的是`cancel`方法。
+`Object` `{id:Number, interval:Boolean, cancel:function}` 相当于延时的handle，`id`和`interval`用作参考，一般有用的是`cancel`方法。
 
 **Demo**
 
@@ -1449,13 +1478,13 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* fn:Function 需要被封装的方法
-* ms:Number 可选，延时多少毫秒执行`fn`，不传或传`0`、`null`等假值是，默认成150ms
-* thisArg:Object 可选，`fn`运行时的`this`指向
+* `fn:Function` 需要被封装的方法
+* `ms:Number` 可选，延时多少毫秒执行`fn`，不传或传`0`、`null`等假值是，默认成150ms
+* `thisArg:Object` 可选，`fn`运行时的`this`指向
 
 **Return**
 
-Function 封装后的方法
+`Function` 封装后的方法
 
 **Demo**
 
@@ -1497,13 +1526,13 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* fn:Function 需要“限流”的方法
-* ms:Number 时间长度
-* thisArg:Object 可选，`fn`运行时的`this`指向
+* `fn:Function` 需要“限流”的方法
+* `ms:Number` 时间长度
+* `thisArg:Object` 可选，`fn`运行时的`this`指向
 
 **Return**
 
-Function 封装`fn`的限流器
+`Function` 封装`fn`的限流器
 
 **Demo**
 
@@ -1528,14 +1557,14 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* classA:Function 需要继承的接受者类，`extend`方法的唯一受影响者
-* classB:Function 被继承的源类，该方法对此类无任何影响，
-* protoX:Object 可选，对`classA.prototype`的额外扩展
-* staticX:Object 可选，静态扩展，对`classA`的额外扩展，作为类的静态属性
+* `classA:Function` 需要继承的接受者类，`extend`方法的唯一受影响者
+* `classB:Function` 被继承的源类，该方法对此类无任何影响，
+* `protoX:Object` 可选，对`classA.prototype`的额外扩展
+* `staticX:Object` 可选，静态扩展，对`classA`的额外扩展，作为类的静态属性
 
 **Return**
 
-Function `classA`本身
+`Function` `classA`本身
 
 **Demo**
 
@@ -1608,11 +1637,11 @@ static1: X
 
 **Parameters**
 
-* cls:Function 待扩展的类
-* arg1:Object 该对象中的属性扩展进`cls.prototype`
-* arg2, arg3, ..., argN 不定长参数，依次对`cls.prototype`，所以越后面的优先级越高，将覆盖之前的属性
-* overwrite:Boolean 可选，默认为true
-* whitelist:Array 可选，允许被扩展进`cls`的属性
+* `cls:Function` 待扩展的类
+* `arg1:Object` 该对象中的属性扩展进`cls.prototype`
+* `arg2, arg3, ..., argN` 不定长参数，依次对`cls.prototype`，所以越后面的优先级越高，将覆盖之前的属性
+* `overwrite:Boolean` 可选，默认为true
+* `whitelist:Array` 可选，允许被扩展进`cls`的属性
 
 **Return**
 
@@ -1669,7 +1698,7 @@ proto1: 2
 
 **Return**
 
-Number 当前时间的毫秒数
+`Number` 当前时间的毫秒数
 
 **Demo**
 
@@ -1690,12 +1719,12 @@ _BUGGY_ 所有的正则式，不论是字面量还是`new`出来的都等价。
 
 **Parameters**
 
-* a:* 任意类型数据
-* b:* 任意类型数据
+* `a:*` 任意类型数据
+* `b:*` 任意类型数据
 
 **Return**
 
-Boolean 两者是否等价
+`Boolean` 两者是否等价
 
 **Demo**
 
@@ -1787,8 +1816,8 @@ _BUGGY_ `filter`在没有返回值的情况下，对数组和非数组处理不�
 
 **Parameters**
 
-* input:* 任意类型数据
-* filter:Function 过滤器
+* `input:*` 任意类型数据
+* `filter:Function` 可选，过滤器
 
 **Return**
 
@@ -1827,7 +1856,7 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* data:String
+* `data:String`
 
 **Return**
 
@@ -1855,11 +1884,11 @@ _TODO_ deprecate parseXML
 
 **Parameters**
 
-* data:String
+* `data:String`
 
 **Return**
 
-Document XML文档对象
+`Document` XML文档对象
 
 **Demo**
 
@@ -1880,7 +1909,11 @@ modulex.use("util", function(util) {
 
 **Parameters**
 
-* data:String 字符串形式的JS代码片段。
+* `data:String` 字符串形式的JS代码片段。
+
+**Return**
+
+`void`
 
 **Demo**
 
@@ -1890,14 +1923,3 @@ modulex.use("util", function(util) {
 	console.info(window.xxx);// {a : 1}
 });
 ```
-
-
-
-
-
-
-
-
-
-
-
