@@ -1339,14 +1339,14 @@ modulex.use("util", function(util) {
 1200ms周期被取消
 ```
 
-##### buffer(fn, ms\[, thisArg\])
+##### buffer(fn\[, ms\[, thisArg\]\])
 
 将源方法`fn`进行封装，返回一个新的方法，调用这个新方法，将延时执行源方法；所有传递给新方法的参数将按原样传递给`fn`；若在延时期间重新调用则，原延时将被取消。
 
 **Parameters**
 
 * fn:Function 需要被封装的方法
-* ms:Number 延时多少毫秒执行`fn`
+* ms:Number 可选，延时多少毫秒执行`fn`，不传或传`0`、`null`等假值是，默认成150ms
 * thisArg:Object 可选，`fn`运行时的`this`指向
 
 **Return**
@@ -1361,7 +1361,7 @@ modulex.use("util", function(util) {
 	function fn() {
 		console.info(util.now() - start, this, arguments);
 	}
-	var fn0 = util.buffer(fn, 0, { _: 0 }),
+	var fn0 = util.buffer(fn, 0, { _: 0 }),// 0会被默认成150ms
 		fn2 = util.buffer(fn, 200, { _: 200 }),// 由于fn2没有被调用，无输出，只有fn2被调用，内部的fn才会被调用
 		fn3 = util.buffer(fn, 500, { _: 500 }),
 		fn4 = util.buffer(fn, -1, { _: -1 });
@@ -1387,19 +1387,19 @@ modulex.use("util", function(util) {
 959 Object { _=500} [1, 2, 3]
 ```
 
-##### throttle(fn, ms\[, context\])
+##### throttle(fn\[, ms\[, thisArg\]\])
 
-对方法`fn`的调用进行限流。
+返回一个新的方法`fn0`，对方法`fn`的调用进行“限流”，在限流后的`ms`毫秒内，无论多少次调用`fn0`，多不会最终调到`fn`，只有过了给定的时间，调用`fn0`才会调到`fn`。每次调用成功后的`ms`时间内，`fn`又将进入“限流”期。
 
 **Parameters**
 
-* fn:Function 需要被封装的方法
-* ms:Number 延时多少毫秒执行`fn`
+* fn:Function 需要“限流”的方法
+* ms:Number 时间长度
 * thisArg:Object 可选，`fn`运行时的`this`指向
 
 **Return**
 
-Function
+Function 封装`fn`的限流器
 
 **Demo**
 
@@ -1409,21 +1409,96 @@ modulex.use("util", function(util) {
 	function fn() {
 		console.info(util.now() - start, this, arguments);
 	}
-	var fn0 = util.buffer(fn, 0, { _: 0 }),
-		fn2 = util.buffer(fn, 200, { _: 200 }),// 由于fn2没有被调用，无输出，只有fn2被调用，内部的fn才会被调用
-		fn3 = util.buffer(fn, 500, { _: 500 }),
-		fn4 = util.buffer(fn, -1, { _: -1 });
-	fn3(3, 2, 1);
-	util.later(function() {// 延时期间重新执行fn3，将导致之前的延时失效
-		fn3(1, 2, 3);// 约950ms后输出：952 Object { _=500} [1, 2, 3]
-	}, 450);
-	fn0();// ms虽然为0，但还是会延时到当前代码段结束，所以此处的fn0将被后面的fn0取消
+	var fn0 = util.throttle(fn);
 	fn0();
-	fn4();// ms为-1的将不会被延时，所以连续两次的fn4都将执行
-	fn4();
-	console.info("--end--");
+	util.later(fn0, 140, false, null, "140 - NOT called");// 140ms，限流后给定的时间（150ms）内调用，不调用fn
+	util.later(fn0, 160, false, null, "160 - called");// 限流结束，调用，重新开始限流
+	util.later(fn0, 300, false, null, "300 - NOT called");// 离上次调用（160ms）仅过了140ms，不调用fn
+	util.later(fn0, 320, false, null, "320 - called");// 离上次限流开始超过150ms，调用fn
 });
 ```
+
+##### extend(classA, classB\[, protoX\[, staticX\]\])
+
+提供原型链类继承的机制，`classA`继承`classB`。`classA.prototype`定义了的属性将不受`classB.prototype`的影响。`classB`的构造器不会在`new classA`的时候被调用。
+
+**Parameters**
+
+* classA:Function 需要继承的接受者类，`extend`方法的唯一受影响者
+* classB:Function 被继承的源类，该方法对此类无任何影响，
+* protoX:Object 可选，对`classA.prototype`的额外扩展
+* staticX:Object 可选，静态扩展，对`classA`的额外扩展，作为类的静态属性
+
+**Return**
+
+Function `classA`本身
+
+**Demo**
+
+```javascript
+modulex.use("util", function(util) {
+	function A() {
+		console.info("A ctor");
+	}
+	A.prototype.proto0 = "A";// proto0不会被B的proto0覆盖
+	A.prototype.proto1 = "A";// proto1被protoX中的proto1覆盖
+	function B() {
+		console.info("B ctor");// 不会在new A()时调用
+	}
+	B.prototype.proto0 = "B";// proto0在A中已经存在，不覆盖
+	B.prototype.proto2 = "B";// proto2在A中未定义，将被继承到A
+	B.prototype.proto3 = "B";// proto3在A中未定义，将被继承到A，但会被protoX中的proto2覆盖
+	B.static0 = "B";// 为B添加静态属性，不会被继承到A
+	function output(a) {
+		console.info(a instanceof A, a instanceof B);
+		util.each("proto0|proto1|proto2|proto3|proto4".split("|"), function(v) {// proto test
+			console.info(v + ": ", a[v]);
+		});
+		util.each("superclass|static0|static1".split("|"), function(v) {// proto test
+			console.info(v + ": ", A[v]);
+		});
+	}
+	console.log("- before extend -");
+	output(new A());
+	util.extend(A, B, {// 添加或覆盖到A.prototype
+		proto1: "X",// protoX的proto1覆盖了A的proto1
+		proto3: "X",// 覆盖B的proto3
+		proto4: "X"// 新加
+	}, {// 添加或覆盖到A本身
+		static1: "X"
+	});
+	console.log("- after extend -");
+	output(new A());
+});
+```
+
+输出如下：
+
+```
+- before extend -
+A ctor
+true false
+proto0: A
+proto1: A
+proto2: undefined
+proto3: undefined
+proto4: undefined
+superclass: undefined
+static0: undefined
+static1: undefined
+- after extend -
+A ctor
+true true
+proto0: A
+proto1: X
+proto2: B
+proto3: X
+proto4: X
+superclass: B { proto0="B",  proto2="B",  proto3="B"}
+static0: undefined
+static1: X
+```
+
 
 ##### 通用工具
 
@@ -1666,8 +1741,6 @@ modulex.use("util", function(util) {
 
 
 ##### augment(r, varArgs)
-
-##### extend(r, s, px, sx)
 
 ##### stamp(o, readOnly, marker)
 
