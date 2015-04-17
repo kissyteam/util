@@ -456,28 +456,6 @@ modulex.use("util", function(util) {
 });
 ```
 
-##### camelCase(str)
-
-_NEW since Version 5_
-_DEPRECATED_ not quite handy
-
-将字符串由蛇型（snake-case）转成骆驼型（camelCase）。
-
-注意：没有反方法`snakeCase`。
-
-**Parameters**
-
-* str:String
-
-```javascript
-modulex.use("util", function(util) {
-	function output(str) {
-		console.info(util.camelCase(str));
-	}
-	output("useless-at-all and should never-be_used");// uselessAtAll and should neverBe_used
-});
-```
-
 ##### escapeHTML(str)|escapeHtml(str)
 
 _TODO_ make escapeHTML deprecated
@@ -777,6 +755,54 @@ modulex.use("util", function(util) {
 	output("");// {"": undefined} --> FIXME 最好能返回空对象
 	output("fuck");// {fuck: undefined}
 	output();// 抛错，算合理吧
+});
+```
+
+##### camelCase(str)
+
+_NEW since Version 5_
+_DEPRECATED_ 没什么用
+
+将字符串由蛇型（snake-case）转成骆驼型（camelCase）。
+
+注意：没有反方法`snakeCase`。
+
+**Parameters**
+
+* str:String
+
+```javascript
+modulex.use("util", function(util) {
+	function output(str) {
+		console.info(util.camelCase(str));
+	}
+	output("useless-at-all and should never-be_used");// uselessAtAll and should neverBe_used
+});
+```
+
+#### ~~ucfirst(str)~~
+
+_DEPRECATED_ 没什么用
+
+乍一看这么名字，好像很吊的样子，但其实..."uc"表示"Upper case"，而"first"指的是第一个字符，所以，该方法做的事情就是把`str`中的第一个字母大写掉。
+
+**Parameters**
+
+* str:String
+
+**Return**
+
+`String` 转换后的字符串
+
+**Demo**
+
+```javascript
+modulex.use("util", function(util) {
+	function output() {
+		console.info(util.ucfirst.apply(util, arguments));
+	}
+	output("the quick fox fucks around...");// The quick fox fucks around...
+	output("对汉字 来说 你 看来 没什么 用啊 亲 useless");// 对汉字 来说 你 看来 没什么 用啊 亲 useless
 });
 ```
 
@@ -1792,6 +1818,6 @@ modulex.use("util", function(util) {
 
 
 
-##### ucfirst(s)
+#
 
 
